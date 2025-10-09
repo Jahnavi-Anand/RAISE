@@ -1,0 +1,156 @@
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAISE - <%= title %></title>
+    <!-- Correctly linking to the compiled CSS file in public/css/ -->
+    <link rel="stylesheet" href="/css/landing.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+   <%- include('header') %>
+
+    <!-- Hero section uses background image defined in CSS -->
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>Empowering Innovation, <br>Fueling Growth</h1>
+                <p>RAISE connects investors with impactful startups. Get invested in tomorrow's success in just minutes, starting from just ₹1,000.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Browse Startups</a>
+                    <a href="#" class="btn btn-secondary">List Your Startup</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container">
+                <div class="stat-item">
+                    <div class="stat-value">90%</div>
+                    <div class="stat-label">Return Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">200+</div>
+                    <div class="stat-label">Startups Funded</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5K+</div>
+                    <div class="stat-label">Active Investors</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-invest-section">
+            <div class="container">
+                <h2>Why Invest with RAISE?</h2>
+                <div class="reasons-grid">
+                    <div class="reason-card">
+                        <span class="reason-icon">1</span>
+                        <h3>Minimum Investment</h3>
+                        <p>Get started with as little as ₹1,000. Our platform makes investing accessible, flexible and transparent.</p>
+                    </div>
+                    <div class="reason-card">
+                        <span class="reason-icon">2</span>
+                        <h3>AI-Powered Term <br>Sheets</h3>
+                        <p>Our platform leverages AI to streamline due diligence and provide investors with smarter insights.</p>
+                    </div>
+                    <div class="reason-card">
+                        <span class="reason-icon">3</span>
+                        <h3>Vetted Startups Only</h3>
+                        <p>We do the heavy lifting for you, so you only see high-quality, pre-vetted startups you can trust.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="top-funded-section">
+            <div class="container">
+                <h2>Top Funded Startups</h2>
+                <p class="section-description">Our carefully curated startups that are changing the world.</p>
+                <div class="startups-grid">
+                    
+                    <% startups.forEach(startup => { %>
+                       <div class="startup-card">
+    <div class="startup-header">
+        <div class="startup-logo" style="background-image: url('<%= startup.logo %>');"></div>
+        <div class="startup-info">
+            <h3 class="startup-name"><%= startup.name %></h3>
+            <p class="startup-category"><%= startup.sector %>, <%= startup.stage %></p>
+        </div>
+    </div>
+    <div class="startup-description">
+        <p><%= startup.description %></p>
+    </div>
+    <div class="startup-details">
+        <span><b>City:</b> <%= startup.city %></span>
+        <span><b>Valuation:</b> <%= startup.valuation %></span>
+    </div>
+    <div class="startup-progress">
+        <div class="progress-bar-bg">
+            <div class="progress-bar" style="width: <%= startup.funding_percent %>%;"></div>
+        </div>
+        <div class="progress-labels">
+            <span><b><%= startup.funding_percent %>%</b></span>
+            <span>Target: <b><%= startup.valuation %></b></span>
+        </div>
+    </div>
+    <div class="startup-bottom">
+        <span>Min Investment: <b><%= startup.min_investment %></b></span>
+        <a href="/startup/<%= startup.id %>" class="btn btn-invest">Invest Now</a>
+    </div>
+</div>
+                   <% }); %>
+                </div>
+                <div class="view-all-button-wrapper">
+                    <a href="#" class="btn btn-secondary-outline">View All Startups</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-choose-raise-section">
+            <div class="container">
+                <h2>Why Choose RAISE?</h2>
+                <div class="choose-grid">
+                    <div class="choose-card">
+                        <i class="fas fa-lock choose-icon"></i>
+                        <h3>Bank-Grade Security</h3>
+                        <p>We use state-of-the-art encryption and security protocols to keep your investments safe.</p>
+                    </div>
+                    <div class="choose-card">
+                        <i class="fas fa-sign-in-alt choose-icon"></i>
+                        <h3>Low Entry Barrier</h3>
+                        <p>With minimum investments of ₹1,000, anyone can become a part of the future.</p>
+                    </div>
+                    <div class="choose-card">
+                        <i class="fas fa-lightbulb choose-icon"></i>
+                        <h3>Curated Startups</h3>
+                        <p>Our team meticulously vets every startup, ensuring quality and potential for growth.</p>
+                    </div>
+                    <div class="choose-card">
+                        <i class="fas fa-gavel choose-icon"></i>
+                        <h3>Seamless Execution</h3>
+                        <p>Our platform simplifies the legal and financial aspects of investing, making it easy.</p>
+                    </div>
+                    <div class="choose-card">
+                        <i class="fas fa-globe choose-icon"></i>
+                        <h3>Global Access</h3>
+                        <p>Invest in startups from around the world and expand your portfolio beyond local markets.</p>
+                    </div>
+                    <div class="choose-card">
+                        <i class="fas fa-chart-line choose-icon"></i>
+                        <h3>Innovation First</h3>
+                        <p>We prioritize groundbreaking ideas and disruptive technologies that shape tomorrow.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Ready to Start Your Investment Journey?</h2>
+                <p>Join thousands of investors who are already backing tomorrow's most innovative startups.</p>
+                <a href="#" class="btn btn-primary">Get Started Now</a>
+            </div>
+        </section>
+    </main>
+
+    <%- include('footer') %>
