@@ -1,4 +1,4 @@
-This is the backend** for *RAISE*, a platform designed to connect *startups* and *investors*.  
+This is the backend for *RAISE*, a platform designed to connect *startups* and *investors*.  
 Built using Node.js, *Express*, and *MongoDB*, it provides a secure and scalable API with authentication, data management, and role-based access.
 
 ---
