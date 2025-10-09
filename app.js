@@ -99,6 +99,10 @@ app.get('/', (req, res) => {
   res.render('landing', { title: 'Landing Page', startups });
 });
 
+app.get('/login', (req, res) => {
+    res.render('login', { title: 'Login - RAISE' });
+});
+
 
 // MongoDB connection (replace with your actual connection string in .env)
 //mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

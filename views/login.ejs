@@ -1,0 +1,30 @@
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - RAISE</title>
+    <!-- Importing Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- LINKING EXTERNAL CSS FILE -->
+    <link rel="stylesheet" href="/css/login.css">
+
+    
+
+
+    <div class="login-form-container">
+        <h2>Login to RAISE</h2>
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn-login">Login</button>
+        </form>
+        <div class="form-link">
+            New to RAISE? <a href="/signup">Sign up</a>
+        </div>
+    </div>
