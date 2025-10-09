@@ -16,8 +16,8 @@
                 <h1>Empowering Innovation, <br>Fueling Growth</h1>
                 <p>RAISE connects investors with impactful startups. Get invested in tomorrow's success in just minutes, starting from just ₹1,000.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Browse Startups</a>
-                    <a href="#" class="btn btn-secondary">List Your Startup</a>
+                    <a href="/startup" class="btn btn-primary">Browse Startups</a>
+                    <a href="/signup" class="btn btn-secondary">List Your Startup</a>
                 </div>
             </div>
         </section>
@@ -95,13 +95,13 @@
     </div>
     <div class="startup-bottom">
         <span>Min Investment: <b><%= startup.min_investment %></b></span>
-        <a href="/startup/<%= startup.id %>" class="btn btn-invest">Invest Now</a>
+        <a href="/signup" class="btn btn-invest">Invest Now</a>
     </div>
 </div>
                    <% }); %>
                 </div>
                 <div class="view-all-button-wrapper">
-                    <a href="#" class="btn btn-secondary-outline">View All Startups</a>
+                    <a href="/startup" class="btn btn-secondary-outline">View All Startups</a>
                 </div>
             </div>
         </section>
@@ -151,6 +151,5 @@
                 <a href="#" class="btn btn-primary">Get Started Now</a>
             </div>
         </section>
+        <%- include('footer') %>
     </main>
-
-    <%- include('footer') %>

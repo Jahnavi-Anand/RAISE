@@ -1,0 +1,258 @@
+body {
+  background-color: #ecf9ff; }
+
+.startup-hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px; }
+  .startup-hero-section .startup-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/img/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    filter: blur(6px); }
+  .startup-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(92deg, #3f7089 40%, #25414e 100%);
+    z-index: 2; }
+  .startup-hero-section .startup-hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 710px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    padding: 40px 20px 38px 20px; }
+    .startup-hero-section .startup-hero-content h1 {
+      font-size: 2.35rem;
+      font-weight: 700;
+      margin-bottom: 13px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(63, 112, 137, 0.12); }
+    .startup-hero-section .startup-hero-content p {
+      font-size: 1.18rem;
+      line-height: 1.55;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+      color: #f5f8fa;
+      text-shadow: 0 1px 5px rgba(63, 112, 137, 0.12); }
+
+@media (max-width: 650px) {
+  .startup-hero-section .startup-hero-content {
+    padding: 28px 5px; }
+    .startup-hero-section .startup-hero-content h1 {
+      font-size: 1.4rem; }
+    .startup-hero-section .startup-hero-content p {
+      font-size: 1rem; }
+  .startup-hero-section {
+    min-height: 140px; } }
+
+.container {
+  width: 94%;
+  max-width: 1200px;
+  margin: auto; }
+
+.startups-main-layout {
+  display: flex;
+  gap: 44px; }
+
+/* Left filter panel */
+.filter-panel {
+  position: sticky;
+  background: #fcfdfe;
+  padding: 32px 22px 20px 22px;
+  min-width: 240px;
+  max-width: 280px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 22px; }
+  .filter-panel .filter-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column; }
+    .filter-panel .filter-group label {
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #528fae;
+      font-size: 1rem; }
+    .filter-panel .filter-group select, .filter-panel .filter-group input {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1.2px solid #e6f3fb;
+      font-size: 1rem;
+      margin-bottom: 2px; }
+    .filter-panel .filter-group button {
+      background: #528fae;
+      color: #fff;
+      border-radius: 7px;
+      border: none;
+      font-weight: 600;
+      padding: 7px 0;
+      cursor: pointer; }
+    .filter-panel .filter-group button:hover {
+      background: #3f7089; }
+
+/* Right startup card column */
+.startups-list {
+  flex: 1 1 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+  margin-right: 0; }
+
+/* Only one card per row, full width */
+.startup-card {
+  background-color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  color: #555;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 215px;
+  padding: 24px 26px;
+  font-size: 0.98rem;
+  margin-bottom: 0; }
+
+.startup-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #f3f3f3;
+  padding-bottom: 12px; }
+  .startup-header .startup-logo {
+    width: 54px;
+    height: 54px;
+    border-radius: 10px;
+    margin-right: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center; }
+
+.startup-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; }
+
+.startup-name {
+  font-weight: 700;
+  font-size: 1.22rem;
+  color: #37617f;
+  margin-bottom: 4px; }
+
+.startup-category {
+  font-size: 1.05rem;
+  color: #7d7d7d;
+  margin-bottom: 0; }
+
+.startup-description p {
+  color: #4c4c4c;
+  margin: 14px 0 18px 0; }
+
+.startup-details {
+  display: flex;
+  gap: 32px;
+  color: #374757;
+  margin-bottom: 18px;
+  justify-content: flex-start; }
+  .startup-details span {
+    min-width: 124px; }
+  .startup-details b {
+    font-weight: 700;
+    color: #2b6777; }
+
+.startup-progress {
+  margin-bottom: 18px; }
+  .startup-progress .progress-bar-bg {
+    width: 100%;
+    background-color: #e1e7ec;
+    height: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 7px; }
+  .startup-progress .progress-bar {
+    height: 100%;
+    background-color: #528fae;
+    border-radius: 6px;
+    transition: width 0.5s ease-out; }
+  .startup-progress .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.97rem;
+    color: #555; }
+    .startup-progress .progress-labels span:first-child {
+      font-weight: 700;
+      color: #528fae; }
+
+.startup-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px solid #f3f3f3;
+  padding-top: 14px;
+  color: #6c757d;
+  gap: 24px; }
+  .startup-bottom span b {
+    font-weight: 700; }
+
+.btn-invest {
+  background-color: #528fae;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+  margin-left: 16px;
+  padding: 8px 20px;
+  min-width: 108px;
+  font-size: 1rem;
+  text-decoration: none; }
+
+.btn-invest:hover {
+  background-color: #3f7089; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .startups-main-layout {
+    flex-direction: column;
+    gap: 22px; }
+  .filter-panel {
+    max-width: 100%;
+    margin-bottom: 18px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px; }
+  .startups-list {
+    gap: 18px; } }
+
+@media (max-width: 600px) {
+  .container {
+    width: 99%; }
+  .startup-card {
+    padding: 14px 7px; } }
