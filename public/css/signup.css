@@ -1,0 +1,274 @@
+/* Variables */
+/* Reset & Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+  padding: 40px 0; }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/img/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px);
+    background-color: rgba(63, 112, 137, 0.4);
+    background-blend-mode: multiply;
+    z-index: -1;
+    transform: scale(1.05); }
+
+.signup-form-container {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 5px 25px rgba(63, 112, 137, 0.25);
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  backdrop-filter: blur(2px);
+  overflow: hidden; }
+
+h2 {
+  color: #3f7089;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center; }
+
+h4 {
+  color: #3f7089;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-left: 4px solid #528fae;
+  padding-left: 10px; }
+
+/* Tabs - ensure exact match on active/inactive */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 10px; }
+
+.tab, .tab.active {
+  flex: 0 1 230px;
+  min-width: 200px;
+  max-width: 300px;
+  padding: 10px 0;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: background 0.18s, box-shadow 0.15s, color 0.18s;
+  background: #eef5f8;
+  color: #6c757d;
+  box-shadow: 0 3px 7px rgba(82, 143, 174, 0.07);
+  cursor: pointer;
+  text-align: center;
+  user-select: none; }
+  .tab:hover:not(.active), .tab.active:hover:not(.active) {
+    background: white; }
+
+.tab.active {
+  background: #528fae;
+  color: #fff;
+  border: 1.5px solid #528fae;
+  box-shadow: 0 4px 18px rgba(82, 143, 174, 0.11); }
+
+/* Square option group for interest areas */
+.interest-areas-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0 6px 0; }
+
+.square-option {
+  min-width: 98px;
+  height: 44px;
+  border-radius: 10px;
+  border: 2.2px solid #e6f3fb;
+  background: #eef5f8;
+  color: #3f7089;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 7px rgba(82, 143, 174, 0.07);
+  margin-bottom: 4px;
+  user-select: none; }
+
+.square-option.selected,
+.square-option:active {
+  background: #528fae;
+  color: #fff;
+  border-color: #528fae;
+  box-shadow: 0 2px 8px rgba(82, 143, 174, 0.17); }
+
+.square-option:disabled {
+  opacity: 0.62;
+  cursor: not-allowed; }
+
+.interest-label {
+  color: #528fae;
+  font-weight: 700;
+  font-size: 1.14rem;
+  margin-bottom: 3px; }
+
+/* Center the login link */
+.form-link {
+  text-align: center !important;
+  margin-top: 15px;
+  font-size: 0.99rem;
+  color: #6c757d; }
+
+.form-link a {
+  color: #528fae;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 5px; }
+
+.form-link a:hover {
+  color: #3f7089;
+  text-decoration: underline; }
+
+/* Form display switching */
+.form-section {
+  display: none;
+  padding: 10px 0; }
+
+.form-section.active {
+  display: block; }
+
+/* Normal Form Groups */
+.form-group {
+  margin-bottom: 20px; }
+
+label {
+  display: block;
+  font-size: 0.95rem;
+  color: #3f7089;
+  margin-bottom: 8px;
+  font-weight: 500; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #e6f3fb;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fcfdfe;
+  transition: border-color 0.2s;
+  font-family: 'Poppins', sans-serif;
+  color: #3f7089; }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #528fae;
+    box-shadow: 0 0 0 3px rgba(82, 143, 174, 0.2); }
+
+/* Regular select dropdown */
+select:not([multiple]) {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23528fae' width='18px' height='18px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  padding-right: 40px; }
+
+/* Multi select for Interest Areas (square look) */
+select[multiple] {
+  padding: 10px;
+  min-height: 120px;
+  border-radius: 8px;
+  background: #fcfdfe;
+  border: 1.5px solid #e6f3fb;
+  font-size: 1rem; }
+  select[multiple] option {
+    padding: 10px 10px;
+    margin: 4px 0;
+    border-radius: 6px;
+    background: #eef5f8;
+    color: #3f7089; }
+  select[multiple] option:checked {
+    background-color: #528fae !important;
+    color: #fff !important;
+    border-radius: 6px;
+    font-weight: 600; }
+
+textarea {
+  resize: vertical; }
+
+small {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #6c757d; }
+
+.btn-signup {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #528fae;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  font-family: 'Poppins', sans-serif; }
+
+.btn-signup:hover {
+  background-color: #3f7089;
+  transform: translateY(-1px); }
+
+/* Center the login link below the form */
+.form-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #6c757d; }
+
+.form-link a {
+  color: #528fae;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 5px;
+  transition: color 0.2s; }
+
+.form-link a:hover {
+  color: #3f7089;
+  text-decoration: underline; }
+
+@media (max-width: 600px) {
+  .signup-form-container {
+    padding: 20px;
+    max-width: 90%; }
+  .tabs {
+    flex-direction: column; }
+  .tab {
+    border-radius: 8px;
+    margin-bottom: 10px;
+    min-width: unset;
+    max-width: unset;
+    width: 100%; } }
