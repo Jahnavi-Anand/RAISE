@@ -1,0 +1,137 @@
+<link rel="stylesheet" href="/css/startup.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<%- include('header') %>
+<section class="startup-hero-section">
+  <div class="startup-hero-bg"></div>
+  <div class="startup-hero-content">
+    <h1>Discover Registered & Verified Startups</h1>
+    <p>
+      All startups featured here are hand-verified by RAISE. Find disruptive teams transforming industries—every profile is vetted for trust and transparency.
+    </p>
+  </div>
+</section>
+
+<section class="top-funded-section">
+    <div class="container">
+        <div class="startups-main-layout">
+            <!-- Left Panel: Filters -->
+            <aside class="filter-panel">
+                
+                <div class="filter-group">
+                    <label>Sector</label>
+                    <select id="filter-sector">
+                        <option value="">All</option>
+                        <option value="Tech">Technology</option>
+                        <option value="Health">Health</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Finance">FinTech</option>
+                        <option value="Education">Education</option>
+                        <option value="Retail">Retail</option>
+                        <option value="Energy">Energy</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Stage</label>
+                    <select id="filter-stage">
+                        <option value="">All</option>
+                        <option value="Seed">Pre-Seed</option>
+                        <option value="Seed">Seed</option>
+                        <option value="Early">Early</option>
+                        <option value="Growth">Growth</option>
+                        <option value="Expansion">Expansion</option>
+                        <option value="Mature">Mature</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>City</label>
+                    <input type="text" id="filter-city" placeholder="City...">
+                </div>
+                <div class="filter-group">
+                    <button id="filter-clear" type="button">Clear All</button>
+                </div>
+            </aside>
+
+            <!-- Right Side: Startup Cards -->
+            <div class="startups-list" id="startups-list">
+                <% startups.forEach(startup => { %>
+                    <div class="startup-card" 
+                         data-sector="<%= startup.sector %>"
+                         data-stage="<%= startup.stage %>"
+                         data-city="<%= startup.city %>">
+                        <div class="startup-header">
+                            <div class="startup-logo" style="background-image: url('<%= startup.logo %>');"></div>
+                            <div class="startup-info">
+                                <h3 class="startup-name"><%= startup.name %></h3>
+                                <p class="startup-category"><%= startup.sector %>, <%= startup.stage %></p>
+                            </div>
+                        </div>
+                        <div class="startup-description">
+                            <p><%= startup.description %></p>
+                        </div>
+                        <div class="startup-details">
+                            <span><b>City:</b> <%= startup.city %></span>
+                            <span><b>Valuation:</b> <%= startup.valuation %></span>
+                        </div>
+                        <div class="startup-progress">
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: <%= startup.funding_percent %>%;"></div>
+                            </div>
+                            <div class="progress-labels">
+                                <span><b><%= startup.funding_percent %>%</b></span>
+                                <span>Target: <b><%= startup.valuation %></b></span>
+                            </div>
+                        </div>
+                        <div class="startup-bottom">
+                            <span>Min Investment: <b><%= startup.min_investment %></b></span>
+                            <a href="/signup" class="btn btn-invest">Invest Now</a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</section>
+<br><br>
+<%- include('footer') %>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const sectorFilter = document.getElementById('filter-sector');
+    const stageFilter = document.getElementById('filter-stage');
+    const cityFilter = document.getElementById('filter-city');
+    const clearBtn = document.getElementById('filter-clear');
+    const cards = document.querySelectorAll('.startup-card');
+
+    function matchesFilters(card) {
+        const sectorVal = sectorFilter.value;
+        const stageVal = stageFilter.value;
+        const cityVal = cityFilter.value.trim().toLowerCase();
+
+        const cardSector = card.getAttribute('data-sector');
+        const cardStage = card.getAttribute('data-stage');
+        const cardCity = card.getAttribute('data-city').toLowerCase();
+
+        let match = true;
+        if (sectorVal && cardSector !== sectorVal) match = false;
+        if (stageVal && cardStage !== stageVal) match = false;
+        if (cityVal && !cardCity.includes(cityVal)) match = false;
+        return match;
+    }
+
+    function updateFilters() {
+        cards.forEach(card => {
+            card.style.display = matchesFilters(card) ? 'block' : 'none';
+        });
+    }
+
+    sectorFilter.addEventListener('change', updateFilters);
+    stageFilter.addEventListener('change', updateFilters);
+    cityFilter.addEventListener('input', updateFilters);
+    clearBtn.addEventListener('click', function() {
+        sectorFilter.selectedIndex = 0;
+        stageFilter.selectedIndex = 0;
+        cityFilter.value = '';
+        updateFilters();
+    });
+});
+
+</script>
