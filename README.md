@@ -68,15 +68,20 @@ RAISE is a modern platform for discovering, filtering, and investing in verified
 
 ## Local Setup
 
-1. Install dependencies:
+1. Go into website diretory:
+   ```bash
+   cd Website
+   ```
+   
+3. Install dependencies:
     ```bash
     npm install
     ```
-2. Start server:
+4. Start server:
     ```bash
     npm start
     ```
-3. Access via [http://localhost:4000](http://localhost:4000)
+5. Access via [http://localhost:4000](http://localhost:4000)
 
 ***
 
