@@ -1,0 +1,829 @@
+// Base Variables
+$base-blue: #528fae;      // User's requested primary color
+$primary-color: $base-blue; 
+$dark-primary: darken($base-blue, 8%); // Slightly darker for hover/accents
+$deep-teal: #3f7089;      // Deeper teal/blue for main headings, text, and footer/dark backgrounds
+$secondary-color: #6c757d; // Text color for secondary info
+$light-grey: #ecf9ff;
+$text-color: #333;
+$white: #fff;
+$gradient-start: #528fae; // Start of the gradient for dark sections
+$gradient-end: $deep-teal;   // End of the gradient for dark sections
+
+// Fonts
+$font-family: 'Poppins', sans-serif;
+
+// Mixins & Helpers
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin button-styles($bg-color, $text-color: $white, $border-color: transparent) {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: $bg-color;
+    color: $text-color;
+    border: 1px solid $border-color;
+
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+}
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-family;
+    line-height: 1.6;
+    color: $text-color;
+    background-color: $white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: $deep-teal; /* Using deep teal for headings */
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: $primary-color;
+
+    &:hover {
+        text-decoration: none;
+        color: $dark-primary;
+    }
+}
+
+.btn {
+    @include button-styles($primary-color);
+    border-radius: 30px; 
+
+    &-primary {
+        background-color: #fff;
+        border: 1px solid $deep-teal;
+        color: $deep-teal;
+        padding: 10px 25px;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: $deep-teal;
+            color: $white;
+        }
+    }
+
+    &-secondary {
+        background-color: transparent;
+        border: 2px solid $white;
+        color: $white;
+
+        &:hover {
+            background-color: $white;
+            color: $deep-teal;
+        }
+    }
+
+    &-secondary-outline {
+        background-color: transparent;
+        border: 1px solid $deep-teal;
+        color: $deep-teal;
+        padding: 10px 25px;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: $deep-teal;
+            color: $white;
+        }
+    }
+
+    &-small {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+
+    &-invest {
+        background-color: $deep-teal; /* Darker teal for Invest button */
+        color: $white;
+        border-color: $deep-teal;
+        width: 100%; 
+        text-align: center;
+        padding: 10px 0;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: lighten($deep-teal, 10%);
+        }
+    }
+}
+
+
+// Hero Section
+.hero-section {
+    /* Linking bg.jpg from img folder in public/img/ */
+    background-image: url('/img/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: $white;
+    text-align: center;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden; 
+
+    /* Gradient overlay for better text contrast and color tone */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Use a slight gradient overlay matching the deep teal */
+        background: linear-gradient(to right, rgba($gradient-end, 0.9), rgba(#25414e, 0.9));
+        z-index: 1;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+        line-height: 1.2;
+        margin-bottom: 25px;
+        color: $white;
+    }
+
+    p {
+        font-size: 1.15rem;
+        margin-bottom: 40px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0.9;
+    }
+
+    .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        .btn {
+            padding: 14px 35px;
+            font-size: 1.05rem;
+        }
+    }
+}
+
+// Stats Section
+.stats-section {
+    background-color: $deep-teal; 
+    padding: 60px 0;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+
+    .container {
+        display: flex;
+        justify-content: space-around;
+        gap: 30px;
+        flex-wrap: wrap; 
+    }
+
+    .stat-item {
+        flex: 1;
+        min-width: 200px; 
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: $white;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: $white;
+        }
+    }
+}
+
+// Why Invest Section
+.why-invest-section {
+    background-color: $light-grey;
+    padding: 80px 0;
+    text-align: center;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+    }
+
+    .reasons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+
+        .reason-card {
+            background-color: $white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: left;
+            position: relative; 
+            min-height: 200px; 
+
+            .reason-icon {
+                @include flex-center;
+                width: 50px;
+                height: 50px;
+                background-color: $primary-color;
+                color: $white;
+                border-radius: 50%;
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 20px;
+                float: left; 
+                margin-right: 20px; 
+            }
+
+            h3 {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+                color: $deep-teal;
+                padding-top: 10px; 
+            }
+
+            p {
+                font-size: 0.95rem;
+                color: $secondary-color;
+                line-height: 1.7;
+                clear: both; 
+            }
+        }
+    }
+}
+
+// Top Funded Startups Section
+.top-funded-section {
+    padding: 80px 0;
+    text-align: center;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .section-description {
+        font-size: 1.1rem;
+        color: $secondary-color;
+        margin-bottom: 50px;
+    }
+
+    .startups-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Always 3 columns on desktop */
+    gap: 28px;
+    margin-bottom: 40px;
+}
+
+.startup-card {
+    background-color: #fff;
+    //padding: 28px 36px;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    color: #555;
+    //min-width: 440px;
+    //max-width: 650px;
+    min-height: 220px;
+    min-width: 0;
+    max-width: 380px; /* Make cards smaller */
+    padding: 20px 18px; /* Reduce padding */
+    font-size: 0.98rem;
+}
+
+.startup-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #f3f3f3;
+    padding-bottom: 12px;
+}
+
+.startup-logo {
+    //width: 68px;
+    //height: 68px;
+    //border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    //margin-right: 18px;
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 10px;
+    margin-right: 12px;
+}
+
+.startup-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.startup-name {
+    font-weight: 700;
+    //font-size: 1.6rem;
+    font-size: 1.22rem;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+.startup-category {
+    font-size: 1.05rem;
+    color: #7d7d7d;
+    margin-bottom: 0;
+}
+
+.startup-description p {
+    //font-size: 1.05rem;
+    color: #5d5d5d;
+    margin: 14px 0 18px 0;
+}
+
+.startup-details {
+    display: flex;
+    gap: 32px;
+    //font-size: 1rem;
+    line-height: 1.5;
+    color: #3a3a3a;
+    margin-bottom: 18px;
+    justify-content: flex-start;
+}
+
+.startup-details span {
+    display: inline-block;
+    min-width: 130px;
+    margin-right: 0; /* uniform, managed by gap */
+}
+
+.startup-details span:last-child {
+    margin-right: 0;
+}
+
+.startup-details span b {
+    font-weight: 700;
+    color: #2b6777;
+    margin-right: 4px;
+}
+
+.startup-progress {
+    margin-bottom: 18px;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    background-color: #e1e7ec;
+    height: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 7px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: $base-blue;
+    border-radius: 6px;
+    transition: width 0.5s ease-out;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    //font-size: 1rem;
+    color: #555;
+}
+
+.progress-labels span:first-child {
+    font-weight: 700;
+    color: $base-blue;
+}
+
+.startup-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-top: 1px solid #f3f3f3;
+    padding-top: 15px;
+    //font-size: 1rem;
+    color: $secondary-color;
+    gap: 24px; /* <-- adds uniform space between elements */
+}
+
+.startup-details,
+.startup-description p,
+.startup-bottom,
+.progress-labels {
+    font-size: 0.97rem;
+}
+
+.startup-bottom span b {
+    font-weight: 700;
+}
+
+.btn-invest {
+    background-color: $base-blue;
+    color: #fff;
+    font-weight: 600;
+    //padding: 12px 34px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+    //min-width: 140px;
+    margin-left: 16px; 
+    padding: 8px 20px;
+    min-width: 108px;
+    font-size: 1rem;
+}
+
+.btn-invest:hover {
+    background-color: $deep-teal;
+}
+
+    .view-all-button-wrapper {
+        text-align: center;
+        margin-top: 20px;
+    }
+}
+
+
+// Why Choose RAISE Section
+.why-choose-raise-section {
+    background-color: $light-grey;
+    padding: 80px 0;
+    text-align: center;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+    }
+
+    .choose-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+
+        .choose-card {
+            background-color: $white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            }
+
+            .choose-icon {
+                font-size: 2.5rem;
+                color: $primary-color;
+                margin-bottom: 20px;
+                border-color: $light-grey;
+                border-radius: 6px;
+                background-color: $light-grey;
+                padding: 6px 14px;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+                color: $deep-teal;
+            }
+
+            p {
+                font-size: 0.95rem;
+                color: $secondary-color;
+                line-height: 1.7;
+            }
+        }
+    }
+}
+
+// CTA Section
+.cta-section {
+    background: linear-gradient(to right, $gradient-start, $gradient-end);
+    color: $white;
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden; 
+
+    /* Pattern (same as before, but with updated colors via overlay) */
+    &::before { 
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 30V0h-2v4h-4v2h4v4h2V6h4V4h-4zm0 30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM2 30h28v2H2zm0 8h28v2H2zm0 8h28v2H2zm0 8h28v2H2zm0 8h28v2H2zm0-48h28v2H2zm0-8h28v2H2zm0-8h28v2H2z' fill='%239C92AC'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.15; 
+        z-index: 1;
+    }
+
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+
+    h2 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+        color: $white;
+    }
+
+    p {
+        font-size: 1.15rem;
+        margin-bottom: 40px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0.9;
+    }
+
+    .btn-primary {
+        padding: 14px 35px;
+        font-size: 1.05rem;
+        background-color: $white;
+        color: $deep-teal; 
+        border-color: $white;
+
+        &:hover {
+            background-color: darken($white, 5%);
+        }
+    }
+}
+
+// Footer (Updated)
+.footer {
+    background-color: $deep-teal; /* Set to the primary dark color */
+    color: $white;
+    padding: 60px 0 30px;
+    font-size: 0.9rem;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .footer-top {
+        display: grid;
+        /* Custom grid for 4 columns: wide logo, two link lists, wide social/contact */
+        grid-template-columns: 1.5fr 1fr 1fr 1.5fr; 
+        gap: 30px;
+        align-items: flex-start;
+    }
+
+    .footer-logo {
+        font-size: 2.2rem; /* Slightly larger logo text */
+        font-weight: 700;
+        color: $white;
+        margin-bottom: 15px;
+    }
+    
+    .footer-description { /* Style for the paragraph under the logo */
+        font-size: 1rem;
+        line-height: 1.5;
+        color: rgba($white, 0.8);
+        margin-bottom: 0; 
+        max-width: 250px; /* Optional: Constrain width for cleaner look */
+    }
+
+    .footer-links-group {
+        h4 {
+            font-size: 1.1rem;
+            margin-bottom: 25px; 
+            font-weight: 600;
+            color: $white;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+
+            li {
+                margin-bottom: 12px; /* Adjusted line spacing */
+
+                a {
+                    color: rgba($white, 0.85); /* Slightly brighter links */
+                    font-weight: 400;
+                    font-size: 1rem;
+
+                    &:hover {
+                        color: $primary-color; /* Hover to the primary blue */
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-social {
+        h4 {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: $white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px; 
+
+            a {
+                color: $white;
+                font-size: 1.3rem;
+                opacity: 0.8;
+
+                &:hover {
+                    opacity: 1;
+                    color: $primary-color;
+                }
+            }
+        }
+        
+        .contact-email {
+            font-size: 1rem;
+            font-weight: 500;
+            color: $white;
+            display: block;
+            
+            &:hover {
+                color: $primary-color;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .footer-bottom {
+        text-align: center;
+        border-top: 1px solid rgba($white, 0.2);
+        padding-top: 30px;
+        margin-top: 30px; 
+
+        p {
+            margin: 0;
+            color: rgba($white, 0.6);
+            font-size: 0.9rem;
+        }
+    }
+}
+
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 1200px) {
+    /* Adjust for screens slightly smaller than 1200px, enabling 3 columns */
+    .top-funded-section .startups-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .header {
+        .nav {
+            display: none; 
+        }
+        .container {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+    }
+    
+    .footer .footer-top {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+
+    .hero-section {
+        padding: 80px 0;
+
+        h1 {
+            font-size: 2.8rem;
+        }
+    }
+
+    .stats-section .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .top-funded-section .startups-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+    }
+    
+    .why-invest-section .reasons-grid,
+    .why-choose-raise-section .choose-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .why-invest-section .reason-card,
+    .why-choose-raise-section .choose-card {
+        text-align: center;
+    }
+    .why-invest-section .reason-card .reason-icon {
+        float: none;
+        margin: 0 auto 20px auto;
+    }
+    .why-invest-section .reason-card h3 {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 60px 0;
+
+        h1 {
+            font-size: 2.2rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            gap: 15px;
+
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+    
+    .footer .footer-top {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+        text-align: center;
+    }
+    .footer .footer-links-group h4,
+    .footer .footer-social h4 {
+        margin-top: 20px;
+    }
+    .footer .footer-social .social-icons {
+        justify-content: center;
+    }
+
+    .top-funded-section .startups-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+
+    .cta-section {
+        padding: 60px 0;
+        h2 {
+            font-size: 2rem;
+        }
+    }
+
+    .header .auth-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    .stats-section .stat-item {
+        min-width: unset;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; }
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: #3f7089;
+  /* Using deep teal for headings */
+  margin-bottom: 20px; }
+
+p {
+  margin-bottom: 15px; }
+
+a {
+  text-decoration: none;
+  color: #528fae; }
+  a:hover {
+    text-decoration: none;
+    color: #457893; }
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 7px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: #528fae;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 30px; }
+  .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px); }
+  .btn-primary {
+    background-color: #528fae;
+    border-color: #528fae;
+    color: #fff; }
+  .btn-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff; }
+    .btn-secondary:hover {
+      background-color: #fff;
+      color: #3f7089; }
+  .btn-secondary-outline {
+    background-color: transparent;
+    border: 1px solid #3f7089;
+    color: #3f7089;
+    padding: 10px 25px;
+    border-radius: 6px; }
+    .btn-secondary-outline:hover {
+      background-color: #3f7089;
+      color: #fff; }
+  .btn-small {
+    padding: 8px 20px;
+    font-size: 0.9rem; }
+  .btn-invest {
+    background-color: #3f7089;
+    /* Darker teal for Invest button */
+    color: #fff;
+    border-color: #3f7089;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 6px; }
+    .btn-invest:hover {
+      background-color: #4f8dac; }
+
+.header {
+  background-color: #fff;
+  padding: 20px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); }
+  .header .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between; }
+  .header .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #3f7089; }
+  .header .header-logo {
+    height: 50px;
+    width: auto; }
+  .header .nav ul {
+    list-style: none;
+    display: flex; }
+    .header .nav ul li {
+      margin-left: 30px; }
+      .header .nav ul li a {
+        color: #333;
+        font-weight: 500;
+        position: relative;
+        text-decoration: none;
+        transition: color 0.3s ease; }
+        .header .nav ul li a::after {
+          content: "";
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: #528fae;
+          transition: width 0.3s ease; }
+        .header .nav ul li a:hover {
+          color: #528fae; }
+        .header .nav ul li a:hover::after {
+          width: 100%; }
+  .header .auth-buttons .btn-login {
+    color: #3f7089;
+    border: 1px solid #528fae;
+    font-weight: 600;
+    margin-right: 20px;
+    transition: all 0.3s ease;
+    font-size: 0.90rem;
+    padding: 6px 16px;
+    border-radius: 7px; }
+    .header .auth-buttons .btn-login:hover {
+      color: #528fae; }
+  .header .auth-buttons .btn-signup {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 7px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: #528fae;
+    color: #fff;
+    border: 1px solid transparent;
+    padding: 6px 16px;
+    font-size: 0.90rem; }
+    .header .auth-buttons .btn-signup:hover {
+      opacity: 0.9;
+      transform: translateY(-2px); }

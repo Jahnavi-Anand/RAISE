@@ -1,0 +1,240 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px; }
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: #3f7089;
+  /* Using deep teal for headings */
+  margin-bottom: 20px; }
+
+p {
+  margin-bottom: 15px; }
+
+a {
+  text-decoration: none;
+  color: #528fae; }
+  a:hover {
+    text-decoration: none;
+    color: #457893; }
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: #528fae;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 30px; }
+  .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px); }
+  .btn-primary {
+    background-color: #528fae;
+    border-color: #528fae;
+    color: #fff; }
+  .btn-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff; }
+    .btn-secondary:hover {
+      background-color: #fff;
+      color: #3f7089; }
+  .btn-secondary-outline {
+    background-color: transparent;
+    border: 1px solid #3f7089;
+    color: #3f7089;
+    padding: 10px 25px;
+    border-radius: 6px; }
+    .btn-secondary-outline:hover {
+      background-color: #3f7089;
+      color: #fff; }
+  .btn-small {
+    padding: 8px 20px;
+    font-size: 0.9rem; }
+  .btn-invest {
+    background-color: #3f7089;
+    /* Darker teal for Invest button */
+    color: #fff;
+    border-color: #3f7089;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 6px; }
+    .btn-invest:hover {
+      background-color: #4f8dac; }
+
+.footer {
+  background-color: #25414e;
+  /* Set to the primary dark color */
+  color: #fff;
+  padding: 60px 0 30px;
+  font-size: 0.9rem; }
+  .footer .container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; }
+  .footer .footer-top {
+    display: grid;
+    /* Custom grid for 4 columns: wide logo, two link lists, wide social/contact */
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 30px;
+    align-items: flex-start; }
+  .footer .footer-logo {
+    font-size: 2.2rem;
+    /* Slightly larger logo text */
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px; }
+  .footer .footer-description {
+    /* Style for the paragraph under the logo */
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0;
+    max-width: 250px;
+    /* Optional: Constrain width for cleaner look */ }
+  .footer .footer-links-group h4 {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #fff; }
+  .footer .footer-links-group ul {
+    list-style: none;
+    padding-left: 0; }
+    .footer .footer-links-group ul li {
+      margin-bottom: 12px;
+      /* Adjusted line spacing */ }
+      .footer .footer-links-group ul li a {
+        color: rgba(255, 255, 255, 0.85);
+        /* Slightly brighter links */
+        font-weight: 400;
+        font-size: 1rem; }
+        .footer .footer-links-group ul li a:hover {
+          color: #528fae;
+          /* Hover to the primary blue */
+          text-decoration: none; }
+  .footer .footer-social h4 {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #fff; }
+  .footer .footer-social .social-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px; }
+    .footer .footer-social .social-icons a {
+      color: #fff;
+      font-size: 1.3rem;
+      opacity: 0.8; }
+      .footer .footer-social .social-icons a:hover {
+        opacity: 1;
+        color: #528fae; }
+  .footer .footer-social .contact-email {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    display: block; }
+    .footer .footer-social .contact-email:hover {
+      color: #528fae;
+      text-decoration: underline; }
+  .footer .footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 30px;
+    margin-top: 30px; }
+    .footer .footer-bottom p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem; }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+  /* Adjust for screens slightly smaller than 1200px, enabling 3 columns */
+  .top-funded-section .startups-grid {
+    grid-template-columns: repeat(3, 1fr); } }
+
+@media (max-width: 992px) {
+  .header .nav {
+    display: none; }
+  .header .container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; }
+  .footer .footer-top {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns on tablets */ }
+  .hero-section {
+    padding: 80px 0; }
+    .hero-section h1 {
+      font-size: 2.8rem; }
+  .stats-section .container {
+    flex-direction: column;
+    align-items: center; }
+  .top-funded-section .startups-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns on tablet */ }
+  .why-invest-section .reasons-grid,
+  .why-choose-raise-section .choose-grid {
+    grid-template-columns: 1fr; }
+  .why-invest-section .reason-card,
+  .why-choose-raise-section .choose-card {
+    text-align: center; }
+  .why-invest-section .reason-card .reason-icon {
+    float: none;
+    margin: 0 auto 20px auto; }
+  .why-invest-section .reason-card h3 {
+    padding-top: 0; } }
+
+@media (max-width: 576px) {
+  .hero-section {
+    padding: 60px 0; }
+    .hero-section h1 {
+      font-size: 2.2rem; }
+    .hero-section .hero-buttons {
+      flex-direction: column;
+      gap: 15px; }
+      .hero-section .hero-buttons .btn {
+        width: 100%; }
+  .footer .footer-top {
+    grid-template-columns: 1fr;
+    /* 1 column on mobile */
+    text-align: center; }
+  .footer .footer-links-group h4,
+  .footer .footer-social h4 {
+    margin-top: 20px; }
+  .footer .footer-social .social-icons {
+    justify-content: center; }
+  .top-funded-section .startups-grid {
+    grid-template-columns: 1fr;
+    /* Single column on mobile */ }
+  .cta-section {
+    padding: 60px 0; }
+    .cta-section h2 {
+      font-size: 2rem; }
+  .header .auth-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px; }
+  .stats-section .stat-item {
+    min-width: unset;
+    width: 100%;
+    margin-bottom: 20px; } }
