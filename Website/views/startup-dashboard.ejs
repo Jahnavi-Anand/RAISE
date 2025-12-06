@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Startup Dashboard | <%= startup ? startup.name : "Your Startup" %></title>
+    <link rel="stylesheet" href="/css/landing.scss">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="container top-nav-inner">
+            <div class="logo">
+                <a href="/">Startup<span>Connect</span></a>
+            </div>
+            <nav class="top-nav-links">
+                <a href="/startups">Browse Investors</a>
+                <a href="/safe">SAFE Generator</a>
+                <a href="/profile" class="top-nav-user">
+                    <div class="avatar-circle"><%= startup && startup.name ? startup.name.charAt(0).toUpperCase() : "S" %></div>
+                    <span><%= startup ? startup.name : "Your Startup" %></span>
+                </a>
+                <form action="/logout" method="POST">
+                    <button class="btn btn-primary btn-small">Logout</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-section">
+                <p class="sidebar-label">Mode</p>
+                <div class="sidebar-pill sidebar-pill--active">Startup Dashboard</div>
+            </div>
+
+            <div class="sidebar-section">
+                <p class="sidebar-label">Navigation</p>
+                <ul class="sidebar-menu">
+                    <li><a href="/dashboard/startup" class="sidebar-link active">Overview</a></li>
+                    <li><a href="/dashboard/startup/round" class="sidebar-link">Fundraising Round</a></li>
+                    <li><a href="/dashboard/startup/investors" class="sidebar-link">Interested Investors</a></li>
+                    <li><a href="/dashboard/startup/tasks" class="sidebar-link">Tasks & Updates</a></li>
+                    <li><a href="/profile" class="sidebar-link">Startup Profile</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section sidebar-section--muted">
+                <p class="sidebar-label">Quick Actions</p>
+                <a href="/safe" class="btn btn-invest btn-small">Generate SAFE with AI</a>
+                <a href="/startups/<%= startup ? startup._id : '' %>" class="btn btn-secondary-outline btn-small" style="margin-top:8px;">
+                    View Public Profile
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <section class="dashboard-main">
+            <!-- Header / greeting -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Welcome back, <%= startup ? startup.founderName : "Founder" %> 👋</h1>
+                    <p class="dashboard-subtitle">
+                        Here’s a quick snapshot of your fundraising journey and investor interest.
+                    </p>
+                </div>
+                <div class="dashboard-header-right">
+                    <span class="status-badge status-badge--success">
+                        <span class="status-dot"></span>
+                        Profile: <%= startup && startup.profileCompletion ? startup.profileCompletion : 72 %>% complete
+                    </span>
+                    <a href="/profile/edit" class="btn btn-primary btn-small">Finish Profile</a>
+                </div>
+            </div>
+
+            <!-- Stats row -->
+            <section class="dashboard-stat-cards">
+                <article class="stat-card">
+                    <p class="stat-label">Total Raised</p>
+                    <h2 class="stat-value">
+                        ₹<%= startup && startup.totalRaised ? startup.totalRaised.toLocaleString("en-IN") : "0" %>
+                    </h2>
+                    <p class="stat-meta">Across all rounds</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">Current Round</p>
+                    <h2 class="stat-value"><%= startup && startup.currentRound ? startup.currentRound : "Pre-Seed" %></h2>
+                    <p class="stat-meta">
+                        Target: ₹<%= startup && startup.targetAmount ? startup.targetAmount.toLocaleString("en-IN") : "1,00,00,000" %>
+                    </p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">Active Investor Intros</p>
+                    <h2 class="stat-value"><%= activeIntrosCount || 5 %></h2>
+                    <p class="stat-meta">Warm intros currently in progress</p>
+                </article>
+                <article class="stat-card">
+                    <p class="stat-label">Last Activity</p>
+                    <h2 class="stat-value">
+                        <%= lastActivity || "Today" %>
+                    </h2>
+                    <p class="stat-meta">Keep momentum high 🚀</p>
+                </article>
+            </section>
+
+            <!-- Two-column main panels -->
+            <div class="dashboard-grid">
+                <!-- Left column -->
+                <div class="dashboard-column">
+                    <!-- Current round details -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Current Fundraising Round</h2>
+                            <span class="tag tag--stage">
+                                <%= startup && startup.currentRound ? startup.currentRound : "Pre-Seed" %>
+                            </span>
+                        </div>
+                        <div class="card-body card-body--grid">
+                            <div>
+                                <p class="card-label">Round Size</p>
+                                <p class="card-value">
+                                    ₹<%= startup && startup.targetAmount ? startup.targetAmount.toLocaleString("en-IN") : "1,00,00,000" %>
+                                </p>
+                            </div>
+                            <div>
+                                <p class="card-label">Committed</p>
+                                <p class="card-value">
+                                    ₹<%= startup && startup.committedAmount ? startup.committedAmount.toLocaleString("en-IN") : "35,00,000" %>
+                                </p>
+                            </div>
+                            <div>
+                                <p class="card-label">Min. Ticket</p>
+                                <p class="card-value">
+                                    ₹<%= startup && startup.minTicketSize ? startup.minTicketSize.toLocaleString("en-IN") : "5,00,000" %>
+                                </p>
+                            </div>
+                            <div>
+                                <p class="card-label">Runway</p>
+                                <p class="card-value"><%= startup && startup.runwayMonths ? startup.runwayMonths : 12 %> months</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="/dashboard/startup/round/edit" class="btn btn-secondary-outline btn-small">
+                                Edit Round Details
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Tasks -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Fundraising Tasks</h2>
+                            <span class="card-meta">What to do next</span>
+                        </div>
+                        <div class="card-body">
+                            <ul class="tasks-list">
+                                <% (tasks || [
+                                    { title: "Send follow-up to 3 interested investors", due: "Today", priority: "High" },
+                                    { title: "Upload latest traction & metrics", due: "Tomorrow", priority: "Medium" },
+                                    { title: "Shortlist 10 more investors in your sector", due: "This week", priority: "Low" },
+                                ]).forEach(function(task){ %>
+                                    <li class="tasks-item">
+                                        <div>
+                                            <p class="tasks-title"><%= task.title %></p>
+                                            <p class="tasks-meta">
+                                                Due: <span><%= task.due %></span> •
+                                                Priority: <span><%= task.priority %></span>
+                                            </p>
+                                        </div>
+                                        <button class="btn btn-primary btn-small tasks-btn-complete">
+                                            Mark done
+                                        </button>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right column -->
+                <div class="dashboard-column">
+                    <!-- Interested investors table -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Interested Investors</h2>
+                            <span class="card-meta">
+                                <%= interestedInvestors && interestedInvestors.length ? interestedInvestors.length : 4 %> active
+                            </span>
+                        </div>
+                        <div class="card-body table-wrapper">
+                            <table class="table table--compact">
+                                <thead>
+                                    <tr>
+                                        <th>Investor</th>
+                                        <th>Type</th>
+                                        <th>Ticket Size</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% (interestedInvestors || [
+                                        { name: "Ananya Capital", type: "Micro VC", ticket: "₹25–50L", status: "In discussion" },
+                                        { name: "Dev Singh", type: "Angel", ticket: "₹10–15L", status: "Requested deck" },
+                                        { name: "NorthBridge Ventures", type: "VC", ticket: "₹50L–1Cr", status: "Warm intro" },
+                                        { name: "Harbor Angels", type: "Angel Network", ticket: "₹15–30L", status: "Reviewing" }
+                                    ]).forEach(function(inv){ %>
+                                        <tr>
+                                            <td><%= inv.name %></td>
+                                            <td><%= inv.type %></td>
+                                            <td><%= inv.ticket %></td>
+                                            <td>
+                                                <span class="status-badge 
+                                                    <%= inv.status === 'In discussion' ? 'status-badge--info' : '' %>
+                                                    <%= inv.status === 'Requested deck' ? 'status-badge--warning' : '' %>
+                                                    <%= inv.status === 'Warm intro' ? 'status-badge--success' : '' %>">
+                                                    <%= inv.status %>
+                                                </span>
+                                            </td>
+                                            <td class="table-actions">
+                                                <a href="/dashboard/startup/investors/<%= inv._id || '' %>" class="btn btn-secondary-outline btn-small">
+                                                    View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- Updates -->
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Latest Investor Updates</h2>
+                        </div>
+                        <div class="card-body">
+                            <ul class="feed-list">
+                                <li class="feed-item">
+                                    <p class="feed-title">Monthly update – November</p>
+                                    <p class="feed-meta">Sent to 12 investors • Open rate: 78%</p>
+                                </li>
+                                <li class="feed-item">
+                                    <p class="feed-title">New LOI from Harbor Angels</p>
+                                    <p class="feed-meta">₹15L committed • 2 days ago</p>
+                                </li>
+                                <li class="feed-item">
+                                    <p class="feed-title">Deck viewed by 3 new investors</p>
+                                    <p class="feed-meta">This week</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

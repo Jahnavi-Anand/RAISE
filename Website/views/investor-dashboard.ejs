@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Investor Dashboard | <%= investor ? investor.name : "Investor" %></title>
+    <link rel="stylesheet" href="/css/landing.scss">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="container top-nav-inner">
+            <div class="logo">
+                <a href="/">Startup<span>Connect</span></a>
+            </div>
+            <nav class="top-nav-links">
+                <a href="/startups">Browse Startups</a>
+                <a href="/safe">SAFE Generator</a>
+                <a href="/dashboard/investor" class="top-nav-user">
+                    <div class="avatar-circle"><%= investor && investor.name ? investor.name.charAt(0).toUpperCase() : "I" %></div>
+                    <span><%= investor ? investor.name : "Investor" %></span>
+                </a>
+                <form action="/logout" method="POST">
+                    <button class="btn btn-primary btn-small">Logout</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-section">
+                <p class="sidebar-label">Mode</p>
+                <div class="sidebar-pill sidebar-pill--active">Investor Dashboard</div>
+            </div>
+
+            <div class="sidebar-section">
+                <p class="sidebar-label">Pipeline</p>
+                <ul class="sidebar-menu">
+                    <li><a href="#shortlisted" class="sidebar-link active">Shortlisted</a></li>
+                    <li><a href="#in-discussion" class="sidebar-link">In Discussion</a></li>
+                    <li><a href="#committed" class="sidebar-link">Committed</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section sidebar-section--muted">
+                <p class="sidebar-label">Preferences</p>
+                <a href="/profile/investor" class="sidebar-link">Update thesis</a>
+                <a href="/notifications" class="sidebar-link">Notifications</a>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <section class="dashboard-main">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <div>
+                    <h1>Welcome, <%= investor ? investor.name : "Investor" %> 👋</h1>
+                    <p class="dashboard-subtitle">
+                        Discover vetted startups that match your ticket size, sector, and thesis.
+                    </p>
+                </div>
+                <div class="dashboard-header-right">
+                    <span class="status-badge status-badge--info">
+                        <span class="status-dot"></span>
+                        <%= startups && startups.length ? startups.length : 18 %> matches today
+                    </span>
+                    <a href="/startups" class="btn btn-primary btn-small">Browse all</a>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <section class="filters-bar card">
+                <form action="/dashboard/investor" method="GET" class="filters-grid">
+                    <div class="form-group">
+                        <label for="search">Search startups</label>
+                        <input type="text" id="search" name="search" placeholder="Fintech, AI, EV, etc." value="<%= query && query.search ? query.search : '' %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="stage">Stage</label>
+                        <select id="stage" name="stage">
+                            <option value="">Any</option>
+                            <option value="Pre-Seed">Pre-Seed</option>
+                            <option value="Seed">Seed</option>
+                            <option value="Series A">Series A</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sector">Sector</label>
+                        <select id="sector" name="sector">
+                            <option value="">Any</option>
+                            <option value="Fintech">Fintech</option>
+                            <option value="SaaS">SaaS</option>
+                            <option value="Consumer">Consumer</option>
+                            <option value="Climate">Climate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input id="location" name="location" placeholder="Tier 2 / Tier 3 cities" value="<%= query && query.location ? query.location : '' %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="ticket">Ticket size</label>
+                        <select id="ticket" name="ticket">
+                            <option value="">Any</option>
+                            <option value="0-25L">₹0–25L</option>
+                            <option value="25-50L">₹25–50L</option>
+                            <option value="50L-1Cr">₹50L–1Cr</option>
+                            <option value="1Cr+">₹1Cr+</option>
+                        </select>
+                    </div>
+                    <div class="filters-actions">
+                        <button class="btn btn-invest btn-small" type="submit">Apply Filters</button>
+                        <a href="/dashboard/investor" class="btn btn-secondary-outline btn-small">Clear</a>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Main grid -->
+            <div class="dashboard-grid">
+                <!-- Startups list -->
+                <div class="dashboard-column">
+                    <section class="card">
+                        <div class="card-header">
+                            <h2>Recommended Startups</h2>
+                            <span class="card-meta">Based on your thesis & preferences</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="startup-list">
+                                <% (startups || [
+                                    {
+                                        name: "RuralPay",
+                                        city: "Indore",
+                                        stage: "Seed",
+                                        sector: "Fintech",
+                                        ticket: "₹25–50L",
+                                        brief: "Financial infrastructure for rural Kirana stores.",
+                                        traction: "₹30L monthly GMV • 800 merchants"
+                                    },
+                                    {
+                                        name: "BusRoute AI",
+                                        city: "Jaipur",
+                                        stage: "Pre-Seed",
+                                        sector: "Mobility",
+                                        ticket: "₹10–25L",
+                                        brief: "AI-optimised bus routes for tier-2 cities.",
+                                        traction: "3 city pilots • 15% cost reduction"
+                                    },
+                                    {
+                                        name: "HealthNest",
+                                        city: "Lucknow",
+                                        stage: "Seed",
+                                        sector: "HealthTech",
+                                        ticket: "₹25–75L",
+                                        brief: "Digitising small clinics in tier-3 India.",
+                                        traction: "120 clinics • 40k patients/month"
+                                    }
+                                ]).forEach(function(s){ %>
+                                    <article class="startup-card">
+                                        <div class="startup-card-main">
+                                            <div class="startup-card-header">
+                                                <h3><%= s.name %></h3>
+                                                <span class="tag tag--stage"><%= s.stage %></span>
+                                            </div>
+                                            <p class="startup-card-brief"><%= s.brief %></p>
+                                            <div class="startup-card-meta">
+                                                <span class="tag"><%= s.sector %></span>
+                                                <span class="tag"><%= s.city %></span>
+                                                <span class="tag tag--soft">Ticket: <%= s.ticket %></span>
+                                            </div>
+                                            <p class="startup-card-traction"><%= s.traction %></p>
+                                        </div>
+                                        <div class="startup-card-actions">
+                                            <a href="/startups/<%= s._id || '' %>" class="btn btn-secondary-outline btn-small">
+                                                View Details
+                                            </a>
+                                            <button class="btn btn-invest btn-small">
+                                                Shortlist
+                                            </button>
+                                        </div>
+                                    </article>
+                                <% }) %>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Pipeline sidebar -->
+                <div class="dashboard-column dashboard-column--narrow">
+                    <!-- Shortlisted -->
+                    <section id="shortlisted" class="card card--compact">
+                        <div class="card-header">
+                            <h2>Shortlisted</h2>
+                            <span class="card-meta"><%= pipeline && pipeline.shortlisted ? pipeline.shortlisted.length : 6 %> startups</span>
+                        </div>
+                        <div class="card-body">
+                            <ul class="pipeline-list">
+                                <% (pipeline && pipeline.shortlisted || [
+                                    "RuralPay", "HealthNest", "BusRoute AI", "TownMart", "AgroGrid", "SwasthCare"
+                                ]).forEach(function(name){ %>
+                                    <li class="pipeline-item">
+                                        <span class="pipeline-dot pipeline-dot--blue"></span>
+                                        <span><%= name %></span>
+                                        <span class="pipeline-label">Review deck</span>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- In discussion -->
+                    <section id="in-discussion" class="card card--compact">
+                        <div class="card-header">
+                            <h2>In Discussion</h2>
+                            <span class="card-meta"><%= pipeline && pipeline.inDiscussion ? pipeline.inDiscussion.length : 2 %> active</span>
+                        </div>
+                        <div class="card-body">
+                            <ul class="pipeline-list">
+                                <% (pipeline && pipeline.inDiscussion || [
+                                    "RuralPay", "HealthNest"
+                                ]).forEach(function(name){ %>
+                                    <li class="pipeline-item">
+                                        <span class="pipeline-dot pipeline-dot--amber"></span>
+                                        <span><%= name %></span>
+                                        <span class="pipeline-label">Call scheduled</span>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Committed -->
+                    <section id="committed" class="card card--compact">
+                        <div class="card-header">
+                            <h2>Committed Capital</h2>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-value">
+                                ₹<%= pipeline && pipeline.committedTotal ? pipeline.committedTotal.toLocaleString("en-IN") : "50,00,000" %>
+                            </p>
+                            <p class="card-meta">Across <%= pipeline && pipeline.committedCount ? pipeline.committedCount : 3 %> startups</p>
+                            <a href="/deals" class="btn btn-secondary-outline btn-small" style="margin-top:8px;">
+                                View Deal Notes
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

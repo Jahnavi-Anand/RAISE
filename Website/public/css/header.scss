@@ -1,0 +1,214 @@
+// Base Variables
+$base-blue: #528fae;      // User's requested primary color
+$primary-color: $base-blue; 
+$dark-primary: darken($base-blue, 8%); // Slightly darker for hover/accents
+$deep-teal: #3f7089;      // Deeper teal/blue for main headings, text, and footer/dark backgrounds
+$secondary-color: #6c757d; // Text color for secondary info
+$light-grey: #f8f9fa;
+$text-color: #333;
+$white: #fff;
+$gradient-start: $deep-teal; // Start of the gradient for dark sections
+$gradient-end: #32586b;   // End of the gradient for dark sections
+
+// Fonts
+$font-family: 'Poppins', sans-serif;
+
+// Mixins & Helpers
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin button-styles($bg-color, $text-color: $white, $border-color: transparent) {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 7px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: $bg-color;
+    color: $text-color;
+    border: 1px solid $border-color;
+
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+}
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-family;
+    line-height: 1.6;
+    color: $text-color;
+    background-color: $white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: $deep-teal; /* Using deep teal for headings */
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: $primary-color;
+
+    &:hover {
+        text-decoration: none;
+        color: $dark-primary;
+    }
+}
+
+.btn {
+    @include button-styles($primary-color);
+    border-radius: 30px; 
+
+    &-primary {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: $white;
+    }
+
+    &-secondary {
+        background-color: transparent;
+        border: 2px solid $white;
+        color: $white;
+
+        &:hover {
+            background-color: $white;
+            color: $deep-teal;
+        }
+    }
+
+    &-secondary-outline {
+        background-color: transparent;
+        border: 1px solid $deep-teal;
+        color: $deep-teal;
+        padding: 10px 25px;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: $deep-teal;
+            color: $white;
+        }
+    }
+
+    &-small {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+
+    &-invest {
+        background-color: $deep-teal; /* Darker teal for Invest button */
+        color: $white;
+        border-color: $deep-teal;
+        width: 100%; 
+        text-align: center;
+        padding: 10px 0;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: lighten($deep-teal, 10%);
+        }
+    }
+}
+
+// Header
+.header {
+    background-color: $white;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+
+    .container {
+        @include flex-center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: $deep-teal;
+    }
+    
+    .header-logo {
+        height: 50px; 
+        width: auto;
+    }
+
+    .nav ul {
+        list-style: none;
+        display: flex;
+
+        li {
+            margin-left: 30px;
+
+            a{
+                color: $text-color;
+                font-weight: 500;
+                position: relative;
+                text-decoration: none;
+                transition: color 0.3s ease;
+
+                &::after {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: #528fae;
+                transition: width 0.3s ease;
+                }
+                
+                &:hover {
+                    color: $primary-color;
+                }
+
+                &:hover::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .auth-buttons {
+        .btn-login {
+            color: $deep-teal;
+            border: 1px solid #528fae;
+            font-weight: 600;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.90rem;
+            padding: 6px 16px;
+            border-radius: 7px;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+        .btn-signup {
+            @include button-styles($primary-color, $white);
+            padding: 6px 16px;
+            font-size: 0.90rem;
+        }
+    }
+}

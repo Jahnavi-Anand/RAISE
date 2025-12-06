@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title || 'Signup - RAISE' %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+<body>
+    <div class="signup-form-container">
+        <h2>Join RAISE</h2>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="error-message"><%= error %></div>
+        <% } %>
+
+        <div class="tabs">
+            <div id="investor-tab" class="tab active">I'm an Investor</div>
+            <div id="entrepreneur-tab" class="tab">I'm an Entrepreneur</div>
+        </div>
+        
+        <!-- Investor Form -->
+        <form id="investor-form" class="form-section active" action="/signup" method="POST">
+            <input type="hidden" name="role" value="investor">
+            <div class="form-group">
+                <label for="inv-name">Name</label>
+                <input type="text" id="inv-name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+                <label for="inv-country">Country</label>
+                <input type="text" id="inv-country" name="country" required>
+            </div>
+
+            <div class="form-group">
+                <label class="interest-label">Interest Areas</label>
+                <div class="interest-areas-group" id="interest-areas-group">
+                    <button type="button" class="square-option" data-value="Tech">Tech</button>
+                    <button type="button" class="square-option" data-value="Health">Health</button>
+                    <button type="button" class="square-option" data-value="Finance">Finance</button>
+                    <button type="button" class="square-option" data-value="Education">Education</button>
+                    <button type="button" class="square-option" data-value="Retail">Retail</button>
+                    <button type="button" class="square-option" data-value="Energy">Energy</button>
+                </div>
+                <input type="hidden" id="inv-interest" name="interests" required>
+                <small>Select up to 3 sectors</small>
+            </div>
+
+            <div class="form-group">
+                <label for="inv-mobile">Mobile Number</label>
+                <input type="tel" id="inv-mobile" name="mobile" required autocomplete="tel">
+            </div>
+            <div class="form-group">
+                <label for="inv-email">Email</label>
+                <input type="email" id="inv-email" name="email" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="inv-password">Password</label>
+                <input type="password" id="inv-password" name="password" required autocomplete="new-password">
+            </div>
+            <div class="form-group">
+                <label for="inv-confirm">Confirm Password</label>
+                <input type="password" id="inv-confirm" name="confirmPassword" required autocomplete="new-password">
+            </div>
+
+            <div class="form-link">
+                Already have an account? <a href="/login">Login here</a>
+            </div>
+            <button type="submit" class="btn-signup">Signup as Investor</button>
+        </form>
+        
+        <!-- Entrepreneur Form -->
+        <form id="entrepreneur-form" class="form-section" action="/signup" method="POST">
+            <input type="hidden" name="role" value="startup">
+
+            <h4>About You</h4>
+            <div class="form-group">
+                <label for="ent-name">Name</label>
+                <input type="text" id="ent-name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+                <label for="ent-designation">Designation</label>
+                <input type="text" id="ent-designation" name="designation" required>
+            </div>
+            <div class="form-group">
+                <label for="ent-email">Email</label>
+                <input type="email" id="ent-email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label for="ent-mobile">Mobile Number</label>
+                <input type="tel" id="ent-mobile" name="mobile" required autocomplete="tel">
+            </div>
+
+            <div class="form-group">
+                <label for="ent-password">Password</label>
+                <input type="password" id="ent-password" name="password" required autocomplete="new-password">
+            </div>
+            <div class="form-group">
+                <label for="ent-confirm">Confirm Password</label>
+                <input type="password" id="ent-confirm" name="confirmPassword" required autocomplete="new-password">
+            </div>
+            
+            <h4>About Company</h4>
+            <div class="form-group">
+                <label for="ent-company">Company Name</label>
+                <input type="text" id="ent-company" name="company" required>
+            </div>
+            <select id="ent-sector" name="sector" required>
+                <option value="" disabled selected>Select Sector</option>
+                <option value="Tech">Tech</option>
+                <option value="Health">Health</option>
+                <option value="Finance">Finance</option>
+                <option value="Education">Education</option>
+                <option value="Retail">Retail</option>
+            </select>
+
+            <div class="form-group-triple">
+                <div class="form-group-half">
+                    <label for="ent-country">Country</label>
+                    <input type="text" id="ent-country" name="country" required>
+                </div>
+                <div class="form-group-half">
+                    <label for="ent-city">City</label>
+                    <input type="text" id="ent-city" name="city" required>
+                </div>
+            </div>
+
+            <div class="form-group-triple">
+                <div class="form-group-third">
+                    <label for="ent-stage">Stage</label>
+                    <select id="ent-stage" name="stage" required>
+                        <option value="" disabled selected>Select Stage</option>
+                        <option value="Seed">Seed</option>
+                        <option value="Early">Early</option>
+                        <option value="Growth">Growth</option>
+                        <option value="Expansion">Expansion</option>
+                        <option value="Mature">Mature</option>
+                    </select>
+                </div>
+
+                <div class="form-group-third">
+                    <label for="ent-valuation">Valuation (Cr)</label>
+                    <input type="number" id="ent-valuation" name="valuation" required>
+                </div>
+                <div class="form-group-third">
+                    <label for="ent-min-invest">Target (Lakhs)</label>
+                    <input type="number" id="ent-min-invest" name="min_investment" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="ent-desc">Company Description</label>
+                <textarea id="ent-desc" name="description" required rows="3"></textarea>
+            </div>
+            <div class="form-link">
+                Already have an account? <a href="/login">Login here</a>
+            </div>
+            <button type="submit" class="btn-signup">Signup as Entrepreneur</button>
+        </form>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const investorTab = document.getElementById("investor-tab");
+            const entrepreneurTab = document.getElementById("entrepreneur-tab");
+            const investorForm = document.getElementById("investor-form");
+            const entrepreneurForm = document.getElementById("entrepreneur-form");
+
+            investorTab.addEventListener("click", function() {
+                investorTab.classList.add("active");
+                entrepreneurTab.classList.remove("active");
+                investorForm.classList.add("active");
+                entrepreneurForm.classList.remove("active");
+            });
+
+            entrepreneurTab.addEventListener("click", function() {
+                entrepreneurTab.classList.add("active");
+                investorTab.classList.remove("active");
+                entrepreneurForm.classList.add("active");
+                investorForm.classList.remove("active");
+            });
+
+            // Square selection for Investor Interest Areas
+            const interestButtons = document.querySelectorAll('#interest-areas-group .square-option');
+            const hiddenInput = document.getElementById('inv-interest');
+            let selectedValues = [];
+
+            interestButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        selectedValues = selectedValues.filter(v => v !== value);
+                    } else if (selectedValues.length < 3) {
+                        this.classList.add('selected');
+                        selectedValues.push(value);
+                    } else {
+                        return;
+                    }
+                    hiddenInput.value = selectedValues.join(',');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
