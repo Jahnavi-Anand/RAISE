@@ -2,6 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const client = require('prom-client');
+
+// Collect default metrics (CPU, memory, event loop lag, etc.)
+client.collectDefaultMetrics();
+
 
 dotenv.config();
 
@@ -19,6 +24,23 @@ app.set('views', './views');
 // Static files
 app.use(express.static('public'));
 
+// Count all incoming HTTP requests
+const httpRequestsTotal = new client.Counter({
+  name: 'http_requests_total',
+  help: 'Total HTTP requests received',
+  labelNames: ['method', 'route', 'status']
+});
+
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    httpRequestsTotal.inc({
+      method: req.method,
+      route: req.route ? req.route.path : req.path,
+      status: res.statusCode
+    });
+  });
+  next();
+});
 
 //Info page
 app.get('/info', (req, res) => {
@@ -238,6 +260,11 @@ app.get('/startup', (req, res) => {
   ];
 
   res.render('startup', { title: 'Startups - RAISE', startups });
+});
+
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', client.register.contentType);
+  res.end(await client.register.metrics());
 });
 
 const PORT = process.env.PORT || 4000;
