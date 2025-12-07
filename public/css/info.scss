@@ -1,0 +1,285 @@
+// Base Variables
+$base-blue: #528fae;      // User's requested primary color
+$primary-color: $base-blue; 
+$dark-primary: darken($base-blue, 8%); // Slightly darker for hover/accents
+$deep-teal: #3f7089;      // Deeper teal/blue for main headings, text, and footer/dark backgrounds
+$secondary-color: #6c757d; // Text color for secondary info
+$light-grey: #ecf9ff;
+$text-color: #333;
+$white: #fff;
+$gradient-start: #528fae; // Start of the gradient for dark sections
+$gradient-end: $deep-teal;   // End of the gradient for dark sections
+
+// Fonts
+$font-family: 'Poppins', sans-serif;
+
+// Mixins & Helpers
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin button-styles($bg-color, $text-color: $white, $border-color: transparent) {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: $bg-color;
+    color: $text-color;
+    border: 1px solid $border-color;
+
+    &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+}
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-family;
+    line-height: 1.6;
+    color: $text-color;
+    background-color: $white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: $deep-teal; /* Using deep teal for headings */
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: $primary-color;
+
+    &:hover {
+        text-decoration: none;
+        color: $dark-primary;
+    }
+}
+
+.btn {
+    @include button-styles($primary-color);
+    border-radius: 30px; 
+
+    &-primary {
+        background-color: #fff;
+        border: 1px solid $deep-teal;
+        color: $deep-teal;
+        padding: 10px 25px;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: $deep-teal;
+            color: $white;
+        }
+    }
+
+    &-secondary {
+        background-color: transparent;
+        border: 2px solid $white;
+        color: $white;
+
+        &:hover {
+            background-color: $white;
+            color: $deep-teal;
+        }
+    }
+
+    &-secondary-outline {
+        background-color: transparent;
+        border: 1px solid $deep-teal;
+        color: $deep-teal;
+        padding: 10px 25px;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: $deep-teal;
+            color: $white;
+        }
+    }
+
+    &-small {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+
+    &-invest {
+        background-color: $deep-teal; /* Darker teal for Invest button */
+        color: $white;
+        border-color: $deep-teal;
+        width: 100%; 
+        text-align: center;
+        padding: 10px 0;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: lighten($deep-teal, 10%);
+        }
+    }
+}
+
+// Layout for info page
+.info-header {
+  background: linear-gradient(135deg, $gradient-start, $gradient-end);
+  color: $white;
+  padding: 40px 0 30px;
+  text-align: center;
+
+  h1 {
+    color: $white;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    max-width: 720px;
+    font-size: 0.95rem;
+    opacity: 0.95;
+  }
+}
+
+.info-main {
+  background-color: $white;
+  padding: 30px 0 60px;
+}
+
+.info-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+}
+
+.info-nav {
+  background-color: $light-grey;
+  border-radius: 8px;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-tab {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 12px 20px;
+  font-family: $font-family;
+  font-size: 0.95rem;
+  color: $deep-teal;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-left: 3px solid transparent;
+
+  &.active {
+    background-color: $white;
+    border-left-color: $primary-color;
+    font-weight: 600;
+  }
+
+  &:hover {
+    background-color: lighten($light-grey, 4%);
+  }
+}
+
+.info-content {
+  background-color: $light-grey;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.tab-panel {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.faq-card {
+  border: 1px solid lighten($deep-teal, 35%);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: $white;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  @include flex-center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background-color: #f6fcff;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: $deep-teal;
+  font-weight: 600;
+
+  .faq-toggle {
+    font-size: 1.2rem;
+    color: $secondary-color;
+  }
+}
+
+.faq-answer {
+  padding: 14px 18px 16px;
+  font-size: 0.9rem;
+  color: $text-color;
+  border-top: 1px solid #e3edf4;
+  display: none;
+
+  ol, ul {
+    padding-left: 18px;
+    margin-bottom: 0;
+
+    li {
+      margin-bottom: 6px;
+    }
+  }
+}
+
+.faq-card.open {
+  .faq-answer {
+    display: block;
+  }
+
+  .faq-question .faq-toggle {
+    transform: rotate(45deg); // turns + into x visually
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .info-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .info-nav {
+    flex-direction: row;
+    overflow-x: auto;
+
+    .nav-tab {
+      flex: 1 0 auto;
+      white-space: nowrap;
+    }
+  }
+}

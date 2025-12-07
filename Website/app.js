@@ -158,6 +158,11 @@ app.get('/startup', (req, res) => {
   res.render('startup', { title: 'Startups - RAISE', startups });
 });
 
+//Info page
+app.get('/info', (req, res) => {
+  res.render('info'); // renders views/info.ejs
+});
+
 // -------------------- Auth Pages (GET) --------------------
 app.get('/login', (req, res) => {
   // optional: pass flash message via query (?error=...)
