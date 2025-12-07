@@ -1,6 +1,5 @@
-#placeholder
 provider "aws" {
-  region = "us-east-1"  # update as needed
+  region = "us-east-1"  
 }
 
 resource "aws_vpc" "raise_vpc" {
@@ -108,4 +107,3 @@ resource "aws_instance" "jenkins_agent" {
     Name = "JenkinsAgent-${count.index}"
   }
 }
-
