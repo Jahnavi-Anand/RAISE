@@ -1,216 +1,139 @@
+RAISE is a digital investment and crowdfunding platform connecting Gen‑Z founders and investors with a full-stack web app plus a DevOps‑driven CI/CD pipeline.[1]
 
-# RAISE Platform – Dev Branch
+```markdown
+# RAISE – Gen‑Z Startup Investment Portal
 
-Welcome to the dev branch for the RAISE startup funding platform. This branch contains current development work for both backend and frontend, plus DevOps configuration for smooth local builds, testing, and deployments.
+RAISE is a web platform that helps Indian startups and investors discover each other and execute compliant equity or revenue‑sharing deals using standard templates (no AI‑generated legal documents).[file:12]  
+The main branch contains the production‑ready code for the frontend, backend APIs, and the complete CI/CD pipeline.
 
-***
+---
 
-## Table of Contents
+## Tech stack overview
 
-- Project Overview
-- Frontend Structure
-- DevOps & CI/CD
-- Local Setup
-- Environment Variables
-- Testing
-- Contribution Guide
+- **Frontend:** React, EJS views for server‑rendered pages, SCSS → CSS build pipeline.[file:12]  
+- **Backend:** Node.js / Express with JWT‑based auth, PostgreSQL via Prisma ORM.[file:12]  
+- **DevOps & CI/CD:** Docker, Jenkins, SonarQube, JFrog Artifactory, Terraform, Ansible, AWS EKS, Prometheus, Grafana.[file:12]  
 
-***
+---
 
-## Project Overview
+## Folder structure
 
-RAISE is a modern platform for discovering, filtering, and investing in verified startups. Built for high reliability, transparency, and speed using Node.js, Express, EJS, and SCSS.
+- `frontend/` – React app, static assets, SCSS, EJS templates.  
+- `backend/` – Express server, routes, controllers, Prisma schema, migrations.  
+- `infra/` – Terraform and Ansible scripts for AWS (VPC, RDS, EKS, networking).  
+- `jenkins/` – Jenkinsfile(s) and shared library config.  
+- `k8s/` – Kubernetes manifests / Helm charts for app, ingress, config, and monitoring.  
 
-***
+(Names are indicative; adjust to your repo if different.)
 
-## Frontend Structure
+---
 
-- **Tech Stack**:  
-  - Node.js  
-  - Express  
-  - EJS Templating  
-  - SCSS for styling  
-  - Vanilla JS for SPA behaviors & filtering  
-- **Directory Layout**:  
-  - `/public/` (static assets: images, JS, CSS)  
-  - `/views/` (EJS templates: login, signup, landing, startup)  
-  - `/routes/` (Express routes if split out)
-- **Main Components**:  
-  - Hero and Section overlays with blurred backgrounds (SCSS)
-  - SPA toggle forms and filtering (Investor/Entrepreneur views, startup filters)
-  - Responsive single-column card layouts
-  - Form validations and custom controls (multi-select, progress, etc.)
+## Frontend
 
-***
+**Key features**
 
-## DevOps & CI/CD
+- Landing page, startups listing, investor info pages, and FAQ flow styled with the Raise design system (Poppins + blue/teal palette).[file:12]  
+- Dynamic filtering of startups by sector, stage, and city using client‑side JavaScript.  
+- Shared header/footer partials with EJS for consistent layout across pages.
 
-- **CI/CD Pipeline**:  
-  - Integrated using GitHub Actions (or your chosen runner)
-  - Runs on push/pull-request to dev branch
-- **SonarQube**:  
-  - Code quality and coverage via SonarQube scanner
-  - Example for SonarQube config:
-    ```bash
-    sonar-scanner \
-      -Dsonar.projectKey=raise-dev \
-      -Dsonar.sources=. \
-      -Dsonar.host.url=http://localhost:9000 \
-      -Dsonar.login=YOUR_TOKEN
-    ```
-- **Deployment**:  
-  - Standard deployment via Docker Compose, Heroku, or Vercel supported  
-  - See `/docker/` for example setup (if available)
-- **Linting**:  
-  - ESLint for JS, Stylelint for SCSS (preset configs included)
-
-***
-
-## Local Setup
-
-1. Go into website diretory:
-   ```bash
-   cd Website
-   ```
-   
-3. Install dependencies:
-    ```bash
-    npm install
-    ```
-4. Start server:
-    ```bash
-    npm start
-    ```
-5. Access via [http://localhost:4000](http://localhost:4000)
-
-***
-
-## Environment Variables
-
-Copy `.env.example` to `.env` with your config:
+**Local development**
 
 ```
-MONGO_URI=mongodb://localhost:27017/raise
-PORT=4000
-SONAR_TOKEN=your-token
+cd frontend
+npm install
+npm run dev           # or npm start / vite dev etc.
 ```
 
-***
+The frontend expects the backend API at `http://localhost:4000` by default (configurable via `.env`).
 
-## Testing
+---
 
-- **Unit & Integration**:  
-  Use Jest/Mocha for backend, plus Cypress/Playwright for UI (if configured).
-- **Manual Testing**:  
-  - Verify login/logout, signup, and card filtering
-  - Check form validation and SPA component state
+## Backend
 
-***
+**Responsibilities**
 
-## Contribution Guide
+- REST APIs for:
+  - Startup listing, investor profiles, and deals.  
+  - Authentication and authorization via JWT.  
+- Data layer:
+  - PostgreSQL as primary DB, Prisma for schema and queries.[file:12]  
+- Validation and compliance checks to ensure only verified/KYC‑cleared entities can raise or invest.[file:12]  
 
-- Please branch off `dev` for new features
-- PRs require passing lint and Sonar checks  
-- Frontend must be fully responsive and match Figma design
-- All code must be commented and follow repo conventions
+**Local development**
 
-***
-
-For further questions, raise an issue or contact the maintainers.
-
-***
-
-**This README is ready for your GitHub branch and summarizes both DevOps and frontend structure professionally**.Here’s a clear, professional `README.md` you can use for your GitHub branch:[1][2]
-
-***
-
-# RAISE Platform – Dev Branch
-
-This branch contains active development for the RAISE startup investment platform, including DevOps automation and frontend source code.
-
-***
-
-## Table of Contents
-
-- Project Overview
-- Frontend Overview
-- DevOps Setup
-- Local Development & Environment
-- Testing & Quality
-- Contributing
-
-***
-
-## Project Overview
-
-RAISE helps discover, filter, and invest in registered, verified startups. The stack is Node.js + Express with EJS templating and SCSS for responsive frontend design.
-
-***
-
-## Frontend Overview
-
-- Tech: Node.js, Express, EJS, SCSS/CSS, Vanilla JS
-- Structure:
-  - `views/`: EJS templates (`login`, `signup`, `startup`, `landing`, etc.)
-  - `public/`: Static assets (JS, CSS, images like blurred backgrounds)
-  - Custom scripts for form handling, SPA filter panels, progress bars, and card layouts.
-- Responsive layouts: Startup cards in single-column rows, filters as a fixed left panel.
-- UI features: Blurred hero overlays, branded button toggles, smooth validation.
-
-***
-
-## DevOps Setup
-
-- **CI/CD**: Integrated with GitHub Actions (or applicable runner).
-  - Lint, test, and build are triggered on new pushes and PRs to this branch.
-- **SonarQube**: Configured for code quality scanning.
-  - Example scanner usage:
-    ```bash
-    sonar-scanner -Dsonar.projectKey=raise-dev -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=YOUR_TOKEN
-    ```
-- **Deployment**: Docker Compose and Heroku supported. `docker/` and deployment scripts may be configured if present.
-- **Style checks**: ESLint for JS, Stylelint for SCSS.
-
-***
-
-## Local Development & Environment
-
-1. Clone, then install:
-    ```bash
-    npm install
-    ```
-2. Run the dev server:
-    ```bash
-    npm start
-    ```
-3. Visit [http://localhost:4000](http://localhost:4000)
-
-Set env variables by copying `.env.example` to `.env`:
 ```
-MONGO_URI=mongodb://localhost:27017/raise
-PORT=4000
-SONAR_TOKEN=your-token
+cd backend
+cp .env.example .env     # set DB URL, JWT secret, etc.
+npm install
+npx prisma migrate dev   # apply migrations
+npm run dev              # nodemon / ts-node
 ```
 
-***
+Backend runs on `http://localhost:4000` by default.
 
-## Testing & Quality
+---
 
-- Manual: Use browser for UI/UX, card filtering, form DSLs.
-- Automated: Add tests in `test/`, integrate with Jest or Mocha as preferred.
-- SonarQube: Automatic scan on push for static analysis and coverage.
+## CI/CD pipeline
 
-***
+The main branch is protected and deployed through a Jenkins‑based pipeline.[file:12]  
+
+**Stages**
+
+1. **Checkout & install**
+   - Clone repo, install frontend & backend dependencies using Node.js.  
+
+2. **Static analysis & tests**
+   - Run unit tests for backend and frontend.  
+   - Run SonarQube scan for code quality and coverage.[file:12]  
+
+3. **Build**
+   - Build production frontend bundle.  
+   - Compile SCSS to CSS.  
+   - Package backend as a Node app.
+
+4. **Docker image build & push**
+   - Build versioned Docker images for frontend and backend.  
+   - Push images to JFrog Artifactory / container registry.[file:12]  
+
+5. **Infrastructure provisioning**
+   - Use Terraform to provision / update AWS resources (EKS cluster, RDS, networking).  
+   - Use Ansible for configuration of nodes and environment variables.[file:12]  
+
+6. **Deploy to Kubernetes**
+   - Apply manifests / Helm charts from `k8s/` to the EKS cluster.  
+   - Rolling updates with zero‑downtime strategy.
+
+7. **Monitoring & alerts**
+   - Prometheus scrapes application and node metrics.  
+   - Grafana dashboards visualize app health, latency, error rates, and resource usage.[file:12]  
+
+---
+
+## Running everything with Docker (local)
+
+```
+docker-compose up --build
+```
+
+This brings up:
+
+- `raise-backend` on port `4000`  
+- `raise-frontend` on port `3000` (or 80 via reverse proxy)  
+- Local PostgreSQL instance with seeded data
+
+---
 
 ## Contributing
 
-- Branch from `dev` for features/fixes.
-- Pass lint & sonar checks before PR.
-- UI should be fully responsive and follow design guidelines.
-- Add code comments and keep to project conventions.
+- Create feature branches from `main`.  
+- Open a PR with passing tests and green SonarQube quality gate.  
+- All merges to `main` are automatically built and deployed through the CI/CD pipeline.
 
-***
+---
 
-For any issues, open a GitHub issue or reach out to maintainers.
+## License
 
-***
+This repository is for academic/project use; please check with the team before external reuse.
+```
+
+[1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92555445/42c2881a-76fe-4ac6-a356-8d4c9bdfa102/Raise-Copy-Copy.pptx)
