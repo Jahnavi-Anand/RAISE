@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI SAFE Generator</title>
+    <link rel="stylesheet" href="/css/landing.scss">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="container top-nav-inner">
+            <div class="logo">
+                <a href="/">Startup<span>Connect</span></a>
+            </div>
+            <nav class="top-nav-links">
+                <a href="/startups">Startups</a>
+                <a href="/dashboard/investor">Investor Dashboard</a>
+                <a href="/dashboard/startup">Startup Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="safe-layout container">
+        <section class="safe-header">
+            <div>
+                <h1>AI-Curated SAFE Agreement</h1>
+                <p class="dashboard-subtitle">
+                    Generate a legally structured SAFE draft for your deal.  
+                    Review, edit, and share with founders and your legal counsel.
+                </p>
+                <ul class="safe-bullets">
+                    <li>Based on standard YC-style SAFE structure</li>
+                    <li>Customised with your deal terms</li>
+                    <li>Export as text / PDF from the dashboard (backend)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="safe-grid">
+            <!-- Left: Form -->
+            <section class="card safe-form-card">
+                <div class="card-header">
+                    <h2>Deal Details</h2>
+                    <span class="card-meta">Fill these to generate your SAFE</span>
+                </div>
+                <div class="card-body">
+                    <form action="/safe/generate" method="POST" class="safe-form">
+                        <!-- Parties -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="companyName">Company name</label>
+                                <input type="text" id="companyName" name="companyName" placeholder="e.g., RuralPay Technologies Private Limited" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="companyJurisdiction">Company jurisdiction</label>
+                                <input type="text" id="companyJurisdiction" name="companyJurisdiction" placeholder="e.g., Companies Act, 2013 (India)" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="investorName">Investor name / entity</label>
+                                <input type="text" id="investorName" name="investorName" placeholder="e.g., Ananya Capital LLP" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="governingLaw">Governing law</label>
+                                <select id="governingLaw" name="governingLaw" required>
+                                    <option value="India">India</option>
+                                    <option value="Delaware, USA">Delaware, USA</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="Other">Other (specify below)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="otherLaw">If other, specify governing law (optional)</label>
+                            <input type="text" id="otherLaw" name="otherLaw" placeholder="e.g., England & Wales">
+                        </div>
+
+                        <!-- Economics -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="investmentAmount">Investment amount (currency + amount)</label>
+                                <input type="text" id="investmentAmount" name="investmentAmount" placeholder="e.g., INR 25,00,000" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="valuationCap">Valuation cap (if any)</label>
+                                <input type="text" id="valuationCap" name="valuationCap" placeholder="e.g., INR 30,00,00,000 or N/A">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="discountRate">Discount (%)</label>
+                                <input type="number" id="discountRate" name="discountRate" min="0" max="100" placeholder="e.g., 20">
+                            </div>
+                            <div class="form-group">
+                                <label for="mfntype">SAFE type</label>
+                                <select id="mfntype" name="safeType">
+                                    <option value="post-money">Post-money SAFE</option>
+                                    <option value="pre-money">Pre-money SAFE</option>
+                                    <option value="discount">Discount only SAFE</option>
+                                    <option value="valuation-cap">Valuation cap only SAFE</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Rights -->
+                        <div class="form-row form-row--checkboxes">
+                            <div class="form-group form-group--checkbox">
+                                <input type="checkbox" id="proRataRights" name="proRataRights" value="true">
+                                <label for="proRataRights">Include pro-rata rights</label>
+                            </div>
+                            <div class="form-group form-group--checkbox">
+                                <input type="checkbox" id="mfn" name="mfn" value="true">
+                                <label for="mfn">Include MFN (Most Favoured Nation)</label>
+                            </div>
+                        </div>
+
+                        <!-- Timeline -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="closingDate">Expected closing date</label>
+                                <input type="date" id="closingDate" name="closingDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="targetRound">Target priced round</label>
+                                <input type="text" id="targetRound" name="targetRound" placeholder="e.g., Next equity round within 18–24 months">
+                            </div>
+                        </div>
+
+                        <!-- Special terms -->
+                        <div class="form-group">
+                            <label for="customClauses">Custom clauses / notes for AI (optional)</label>
+                            <textarea id="customClauses" name="customClauses" rows="4" placeholder="Mention any board rights, information rights, ESG clauses, or side letters you want AI to consider."></textarea>
+                        </div>
+
+                        <div class="safe-form-actions">
+                            <button type="submit" class="btn btn-invest">
+                                Generate SAFE with AI
+                            </button>
+                            <p class="safe-helper-text">
+                                The generated draft is **not** a substitute for professional legal advice.  
+                                Please review with your counsel before signing.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Right: Preview -->
+            <section class="card safe-preview-card">
+                <div class="card-header">
+                    <h2>SAFE Preview</h2>
+                    <span class="card-meta">
+                        This will show the AI-generated draft from backend.
+                    </span>
+                </div>
+                <div class="card-body safe-preview-body">
+                    <% if (safeText) { %>
+                        <pre class="safe-preview-text"><%= safeText %></pre>
+                    <% } else { %>
+                        <div class="safe-preview-placeholder">
+                            <p>Fill in the deal details and click “Generate SAFE with AI”.</p>
+                            <ul>
+                                <li>Standard headings: Parties, Definitions, Purchase, Conversion, Liquidity, Termination.</li>
+                                <li>Clear economic terms: valuation cap, discount, MFN, pro-rata rights.</li>
+                                <li>Governing law and dispute resolution clauses.</li>
+                            </ul>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="card-footer safe-preview-footer">
+                    <button class="btn btn-secondary-outline btn-small" type="button">
+                        Copy to clipboard
+                    </button>
+                    <button class="btn btn-primary btn-small" type="button">
+                        Export (PDF / DOCX)* 
+                    </button>
+                    <p class="safe-footer-note">*Export will be wired from backend later.</p>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>

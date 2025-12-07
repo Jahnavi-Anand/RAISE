@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Raise – Info & FAQs</title>
+  <link rel="stylesheet" href="/css/info.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+    <%- include('header') %>
+  <header class="info-header">
+    <div class="container">
+      <h1>Frequently asked questions</h1>
+      <p class="subtitle">
+        Raise is a one‑stop digital gateway that connects Indian startups and investors,
+        enabling compliant equity fundraising without AI‑generated legal documents.
+      </p>
+    </div>
+  </header>
+
+  <main class="info-main">
+    <div class="container info-layout">
+      <!-- Left nav -->
+      <nav class="info-nav">
+        <button class="nav-tab active" data-target="common">Common</button>
+        <button class="nav-tab" data-target="for-startups">For Startups</button>
+        <button class="nav-tab" data-target="for-investors">For Investors</button>
+      </nav>
+
+      <!-- Right content -->
+      <section class="info-content">
+        <!-- COMMON TAB -->
+        <div class="tab-panel active" id="common">
+          <div class="faq-card">
+            <button class="faq-question">
+              <span>What is Raise about?</span>
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Raise is a national‑scale matchmaking portal for the Indian startup ecosystem,
+                helping founders and investors discover each other, exchange information
+                and close compliant equity or revenue‑sharing deals using standard templates.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-card">
+            <button class="faq-question">
+              <span>How does this portal help the ecosystem?</span>
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                The platform acts as a single gateway to startup and investor profiles,
+                curated opportunities, and deal‑flow tools such as document sharing,
+                meeting tracking, and agreement execution based on pre‑defined term‑sheet formats.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STARTUPS TAB -->
+        <div class="tab-panel" id="for-startups">
+          <div class="faq-card">
+            <button class="faq-question">
+              <span>How do startups connect with investors?</span>
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <ol>
+                <li>
+                  <strong>Respond to an investment opportunity:</strong>
+                  Eligible startups can respond to live investment calls listed by registered investors
+                  on the Raise portal and share their decks and documents.
+                </li>
+                <li>
+                  <strong>Direct connection with investors:</strong>
+                  Startups can search filtered investor profiles and send direct interest
+                  messages through the portal’s secure messaging and document‑sharing flow.
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="faq-card">
+            <button class="faq-question">
+              <span>How will Raise add value to startups?</span>
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <ul>
+                <li>Centralised investor discovery with filters for sector, ticket size and geography.</li>
+                <li>Template‑based term sheets and checklists to streamline fundraising without AI drafting.</li>
+                <li>Tracking of meetings, documents and deal status from first pitch to closure.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-card">
+            <button class="faq-question">
+              <span>What are the basic requirements for startups?</span>
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <ul>
+                <li>Incorporated Indian entity with valid registration details.</li>
+                <li>KYC and compliance documents uploaded and verified on the portal.</li>
+                <li>Updated startup profile, pitch deck and funding ask within the Raise dashboard.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- INVESTORS TAB -->
+        <div class="tab-panel" id="for-investors">
+          <div class="faq-card">
+            <button class="faq-question">
+              <span>What are the key features of the portal for investors?</span>
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <ul>
+                <li>Create and publish detailed investor profiles and investment theses.</li>
+                <li>Filter, save and track startup profiles that match preferred sectors and stages.</li>
+                <li>Initiate deal‑flow with startups, including meetings, document exchange and agreement signing.</li>
+                <li>Use Raise timelines and logs to maintain an auditable trail of interactions and decisions.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-card">
+            <button class="faq-question">
+              <span>What benefits does an investor get by registering?</span>
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-answer">
+              <ul>
+                <li>Curated access to verified Indian startups across sectors and stages.</li>
+                <li>Standardised, non‑AI templates for term sheets and agreements aligned with regulations.</li>
+                <li>Integrated tracking of commitments, transactions and portfolio performance inside Raise.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Tab switching
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.getAttribute('data-target');
+
+    // switch active tab
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // switch active panel
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+      panel.classList.toggle('active', panel.id === target);
+    });
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-card .faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.faq-card');
+    const isOpen = card.classList.contains('open');
+
+    // optional: close others in same panel
+    const panel = card.closest('.tab-panel');
+    panel.querySelectorAll('.faq-card').forEach(c => c.classList.remove('open'));
+
+    if (!isOpen) {
+      card.classList.add('open');
+    }
+  });
+});
+
+  </script>
+</body>
+</html>

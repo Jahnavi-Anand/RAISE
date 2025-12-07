@@ -1,0 +1,25 @@
+- name: Install and configure Jenkins Master (Windows)
+  hosts: jenkins-master
+  tasks:
+    - name: Install Chocolatey
+      win_shell: |
+        Set-ExecutionPolicy Bypass -Scope Process -Force
+        iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+    - name: Install OpenJDK
+      win_chocolatey:
+        name: openjdk
+        state: present
+
+    - name: Install Jenkins
+      win_chocolatey:
+        name: jenkins
+        state: present
+
+    - name: Start Jenkins service
+      win_service:
+        name: jenkins
+        start_mode: auto
+        state: started
+
+#placeholder

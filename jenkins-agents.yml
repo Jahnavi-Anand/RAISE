@@ -1,0 +1,30 @@
+- name: Install and configure Jenkins Agent (Windows)
+  hosts: jenkins-agents
+  tasks:
+    - name: Install OpenJDK
+      win_chocolatey:
+        name: openjdk
+        state: present
+
+    - name: Create agent directory
+      win_file:
+        path: C:\agent
+        state: directory
+
+    - name: Download Jenkins Agent JAR
+      win_get_url:
+        url: http://<jenkins-master-ip>:8080/jnlpJars/agent.jar
+        dest: C:\agent\agent.jar
+
+    - name: Install NSSM (Non-Sucking Service Manager)
+      win_chocolatey:
+        name: nssm
+        state: present
+
+    - name: Register Jenkins agent as service
+      win_shell: |
+        nssm install JenkinsAgent "C:\Program Files\OpenJDK\bin\java.exe" "-jar C:\agent\agent.jar -jnlpUrl http://<jenkins-master-ip>:8080/computer/{{ inventory_hostname }}/slave-agent.jnlp"
+        nssm set JenkinsAgent Start SERVICE_AUTO_START
+        nssm start JenkinsAgent
+
+#placeholder

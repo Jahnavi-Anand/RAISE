@@ -1,0 +1,241 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: #3f7089; /* Using deep teal for headings */
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: #528fae;
+}
+a:hover {
+  text-decoration: none;
+  color: rgb(68.6267716535, 120.3086614173, 146.5732283465);
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: #528fae;
+  color: #fff;
+  border: 1px solid transparent;
+}
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+.btn {
+  border-radius: 30px;
+}
+.btn-primary {
+  background-color: #fff;
+  border: 1px solid #3f7089;
+  color: #3f7089;
+  padding: 10px 25px;
+  border-radius: 6px;
+}
+.btn-primary:hover {
+  background-color: #3f7089;
+  color: #fff;
+}
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.btn-secondary:hover {
+  background-color: #fff;
+  color: #3f7089;
+}
+.btn-secondary-outline {
+  background-color: transparent;
+  border: 1px solid #3f7089;
+  color: #3f7089;
+  padding: 10px 25px;
+  border-radius: 6px;
+}
+.btn-secondary-outline:hover {
+  background-color: #3f7089;
+  color: #fff;
+}
+.btn-small {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+.btn-invest {
+  background-color: #3f7089; /* Darker teal for Invest button */
+  color: #fff;
+  border-color: #3f7089;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 6px;
+}
+.btn-invest:hover {
+  background-color: rgb(79.065, 140.56, 171.935);
+}
+
+.info-header {
+  background: linear-gradient(135deg, #528fae, #3f7089);
+  color: #fff;
+  padding: 40px 0 30px;
+  text-align: center;
+}
+.info-header h1 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+.info-header .subtitle {
+  max-width: 720px;
+  font-size: 0.95rem;
+  opacity: 0.95;
+  margin: 0 auto;
+}
+
+.info-main {
+  background-color: #fff;
+  padding: 30px 0 60px;
+}
+
+.info-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  max-width: 1100px;   /* control total width */
+  margin: 0 auto;
+}
+
+.info-nav {
+  background-color: #ecf9ff;
+  border-radius: 8px;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-tab {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 12px 20px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  color: #3f7089;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+.nav-tab.active {
+  background-color: #fff;
+  border-left-color: #528fae;
+  font-weight: 600;
+}
+.nav-tab:hover {
+  background-color: white;
+}
+
+.info-content {
+  background-color: #ecf9ff;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+}
+
+.faq-card {
+  border: 1px solid rgb(164.9225, 197.14, 213.5775);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background-color: #f6fcff;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #3f7089;
+  font-weight: 600;
+}
+.faq-question .faq-toggle {
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.faq-answer {
+  padding: 14px 18px 16px;
+  font-size: 0.9rem;
+  color: #333;
+  border-top: 1px solid #e3edf4;
+  display: none;
+}
+.faq-answer ol, .faq-answer ul {
+  padding-left: 18px;
+  margin-bottom: 0;
+}
+.faq-answer ol li, .faq-answer ul li {
+  margin-bottom: 6px;
+}
+
+.faq-card.open .faq-answer {
+  display: block;
+}
+.faq-card.open .faq-question .faq-toggle {
+  transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .info-layout {
+    grid-template-columns: 1fr;
+  }
+  .info-nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .info-nav .nav-tab {
+    flex: 1 0 auto;
+    white-space: nowrap;
+  }
+}
+
+/*# sourceMappingURL=info.css.map */
