@@ -1,7 +1,7 @@
 # RAISE – Gen‑Z Startup Investment Platform
 
-RAISE is a digital investment and crowdfunding platform connecting Gen‑Z founders with investors.[file:12]  
-It supports compliant equity and revenue‑sharing deals using standard legal templates (no AI‑generated documents), with a full frontend, backend, and DevOps/CI‑CD setup on the **main** branch.[file:12]  
+RAISE is a digital investment and crowdfunding platform connecting Gen‑Z founders with investors.
+It supports compliant equity and revenue‑sharing deals using standard legal templates (no AI‑generated documents), with a full frontend, backend, and DevOps/CI‑CD setup on the **main** branch.
 
 ---
 
@@ -23,14 +23,14 @@ It supports compliant equity and revenue‑sharing deals using standard legal te
 
 ## 🌐 Project Overview
 
-RAISE helps discover, filter, and invest in verified startups while giving investors a transparent, data‑driven view of opportunities.[file:12]  
-The platform combines the openness of crowdfunding with the structure of institutional investing, but relies on curated templates rather than AI to generate any legal documents, aligning with current Indian regulations.[file:12]  
+RAISE helps discover, filter, and invest in verified startups while giving investors a transparent, data‑driven view of opportunities.
+The platform combines the openness of crowdfunding with the structure of institutional investing, but relies on curated templates rather than AI to generate any legal documents, aligning with current Indian regulations.
 
 Core capabilities:
 
 - Startup discovery and filtering by sector, stage, and city.  
-- Verified profiles for startups and investors with KYC/AML workflows.[file:12]  
-- Deal‑flow support: pitch sharing, document exchange, standard term‑sheet templates, and funding progress tracking.[file:12]  
+- Verified profiles for startups and investors with KYC/AML workflows.
+- Deal‑flow support: pitch sharing, document exchange, standard term‑sheet templates, and funding progress tracking.
 
 ---
 
@@ -40,8 +40,8 @@ High‑level components:
 
 - **Client layer:** React + EJS views served via Node.js/Express.  
 - **API layer:** REST APIs with JWT‑based authentication and role‑based authorization.  
-- **Data layer:** PostgreSQL database accessed via Prisma ORM.[file:12]  
-- **Infrastructure:** Dockerized services deployed on AWS EKS; infrastructure managed via Terraform and Ansible; monitoring with Prometheus and Grafana.[file:12]  
+- **Data layer:** PostgreSQL database accessed via Prisma ORM.
+- **Infrastructure:** Dockerized services deployed on AWS EKS; infrastructure managed via Terraform and Ansible; monitoring with Prometheus and Grafana.  
 
 Suggested repo layout:
 
@@ -59,14 +59,14 @@ Suggested repo layout:
 
 - React  
 - EJS (server‑rendered pages)  
-- SCSS → CSS build pipeline[file:12]  
+- SCSS → CSS build pipeline  
 
 ### Backend
 
 - Node.js / Express  
 - PostgreSQL  
 - Prisma ORM  
-- JSON Web Tokens (JWT) for authentication[file:12]  
+- JSON Web Tokens (JWT) for authentication  
 
 ### DevOps / CI‑CD
 
@@ -77,7 +77,7 @@ Suggested repo layout:
 - Terraform  
 - Ansible  
 - AWS EKS (Kubernetes)  
-- Prometheus + Grafana[file:12]  
+- Prometheus + Grafana  
 
 ---
 
@@ -85,9 +85,9 @@ Suggested repo layout:
 
 ### Features
 
-- Landing and information/FAQ pages describing the Raise portal for startups and investors.[file:12]  
+- Landing and information/FAQ pages describing the Raise portal for startups and investors.  
 - Startup listing page with filters for **sector**, **stage**, and **city**, implemented in client‑side JavaScript.  
-- Shared header/footer partials and consistent theming using the Raise color palette and Poppins font.[file:12]  
+- Shared header/footer partials and consistent theming using the Raise color palette and Poppins font. 
 
 ### Structure
 
@@ -120,7 +120,7 @@ The frontend expects the backend API at `http://localhost:4000` (configurable vi
   - Issue token on successful login.  
   - Middleware to protect authenticated and role‑specific routes.  
 - Data layer:
-  - Prisma schema & migrations for users, startups, investments, and audit logs.[file:12]  
+  - Prisma schema & migrations for users, startups, investments, and audit logs.  
 
 ### Local Development
 
@@ -137,7 +137,7 @@ Backend runs at: `http://localhost:4000`.
 
 ## 🚀 DevOps & CI/CD (Jenkins)
 
-The **main** branch is wired to a Jenkins CI/CD pipeline that builds, tests, scans, and deploys the application.[file:12]  
+The **main** branch is wired to a Jenkins CI/CD pipeline that builds, tests, scans, and deploys the application.  
 
 ### Pipeline Stages
 
@@ -147,7 +147,7 @@ The **main** branch is wired to a Jenkins CI/CD pipeline that builds, tests, sca
 
 2. **Static Analysis & Tests**  
    - Run unit tests (backend and frontend)  
-   - Run SonarQube scan to enforce a quality gate[file:12]  
+   - Run SonarQube scan to enforce a quality gate  
 
 3. **Build**  
    - Build production frontend bundle (React/EJS + SCSS → CSS)  
@@ -155,11 +155,11 @@ The **main** branch is wired to a Jenkins CI/CD pipeline that builds, tests, sca
 
 4. **Docker Build & Push**  
    - Build versioned Docker images for frontend and backend  
-   - Push images to JFrog Artifactory (or configured container registry)[file:12]  
+   - Push images to JFrog Artifactory (or configured container registry)  
 
 5. **Infrastructure Provisioning**  
    - Use Terraform to create/update AWS VPC, RDS, and EKS cluster  
-   - Use Ansible to configure nodes and application environment.[file:12]  
+   - Use Ansible to configure nodes and application environment. 
 
 6. **Kubernetes Deployment**  
    - Apply manifests / Helm charts from `k8s/`  
@@ -167,7 +167,7 @@ The **main** branch is wired to a Jenkins CI/CD pipeline that builds, tests, sca
 
 7. **Monitoring & Alerts**  
    - Prometheus scrapes application and node metrics  
-   - Grafana dashboards provide visibility into latency, errors, and resource usage.[file:12]  
+   - Grafana dashboards provide visibility into latency, errors, and resource usage. 
 
 ---
 
@@ -217,7 +217,7 @@ Do **not** commit real secrets into version control.
 - **Static analysis:**
   - ESLint for JavaScript/TypeScript  
   - Stylelint for SCSS  
-  - SonarQube for overall code quality and coverage.[file:12]  
+  - SonarQube for overall code quality and coverage. 
 
 Manual testing checklist:
 
@@ -234,7 +234,7 @@ Manual testing checklist:
 - Before opening a PR:
   - Ensure tests pass (`npm test` in relevant packages).  
   - Ensure linting passes (ESLint, Stylelint).  
-  - Ensure SonarQube quality gate is green (where enforced).[file:12]  
+  - Ensure SonarQube quality gate is green (where enforced).
 - Keep UI responsive and consistent with the Raise design system.  
 - Comment complex logic and follow existing naming and structure conventions.  
 
@@ -242,4 +242,4 @@ Manual testing checklist:
 
 ## 📄 License
 
-This project is intended for academic/project use; contact the maintainers before using it for external or commercial purposes.[file:12]  
+This project is intended for academic/project use; contact the maintainers before using it for external or commercial purposes.  
