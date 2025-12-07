@@ -1,139 +1,162 @@
-RAISE is a digital investment and crowdfunding platform connecting Gen‑Z founders and investors with a full-stack web app plus a DevOps‑driven CI/CD pipeline.[1]
-
 ```markdown
-# RAISE – Gen‑Z Startup Investment Portal
+# RAISE – Gen-Z Startup Investment Platform
 
-RAISE is a web platform that helps Indian startups and investors discover each other and execute compliant equity or revenue‑sharing deals using standard templates (no AI‑generated legal documents).[file:12]  
-The main branch contains the production‑ready code for the frontend, backend APIs, and the complete CI/CD pipeline.
-
----
-
-## Tech stack overview
-
-- **Frontend:** React, EJS views for server‑rendered pages, SCSS → CSS build pipeline.[file:12]  
-- **Backend:** Node.js / Express with JWT‑based auth, PostgreSQL via Prisma ORM.[file:12]  
-- **DevOps & CI/CD:** Docker, Jenkins, SonarQube, JFrog Artifactory, Terraform, Ansible, AWS EKS, Prometheus, Grafana.[file:12]  
+RAISE is a digital investment and crowdfunding platform connecting Gen-Z founders with investors.  
+It supports compliant equity and revenue-sharing deals using standard legal templates.  
+The `main` branch contains production-ready code for the frontend, backend APIs, and CI/CD pipeline.
 
 ---
 
-## Folder structure
+## 🚀 Tech Stack
 
-- `frontend/` – React app, static assets, SCSS, EJS templates.  
-- `backend/` – Express server, routes, controllers, Prisma schema, migrations.  
-- `infra/` – Terraform and Ansible scripts for AWS (VPC, RDS, EKS, networking).  
-- `jenkins/` – Jenkinsfile(s) and shared library config.  
-- `k8s/` – Kubernetes manifests / Helm charts for app, ingress, config, and monitoring.  
+### **Frontend**
+- React  
+- EJS (server-rendered views)  
+- SCSS → CSS build pipeline  
 
-(Names are indicative; adjust to your repo if different.)
+### **Backend**
+- Node.js / Express  
+- JWT-based authentication  
+- PostgreSQL with Prisma ORM  
+
+### **DevOps / CI/CD**
+- Docker  
+- Jenkins  
+- SonarQube  
+- JFrog Artifactory  
+- Terraform  
+- Ansible  
+- AWS EKS (Kubernetes)  
+- Prometheus + Grafana  
 
 ---
 
-## Frontend
-
-**Key features**
-
-- Landing page, startups listing, investor info pages, and FAQ flow styled with the Raise design system (Poppins + blue/teal palette).[file:12]  
-- Dynamic filtering of startups by sector, stage, and city using client‑side JavaScript.  
-- Shared header/footer partials with EJS for consistent layout across pages.
-
-**Local development**
+## 📁 Folder Structure
 
 ```
+
+frontend/   – React app, static assets, SCSS, EJS templates
+backend/    – Express server, routes, controllers, Prisma schema
+infra/      – Terraform & Ansible scripts for AWS (VPC, RDS, EKS)
+jenkins/    – Jenkinsfile(s) and shared library configurations
+k8s/        – Kubernetes manifests / Helm charts
+
+````
+
+---
+
+## 🎨 Frontend
+
+### **Features**
+- Landing page, startup listings, investor pages, FAQ  
+- Filtering by **sector**, **stage**, and **city** (client-side JS)  
+- Shared header/footer via EJS partials  
+
+### **Local Development**
+
+```bash
 cd frontend
 npm install
-npm run dev           # or npm start / vite dev etc.
-```
+npm run dev
+````
 
-The frontend expects the backend API at `http://localhost:4000` by default (configurable via `.env`).
+Backend is expected at: `http://localhost:4000`.
 
 ---
 
-## Backend
+## 🛠 Backend
 
-**Responsibilities**
+### **Responsibilities**
 
-- REST APIs for:
-  - Startup listing, investor profiles, and deals.  
-  - Authentication and authorization via JWT.  
-- Data layer:
-  - PostgreSQL as primary DB, Prisma for schema and queries.[file:12]  
-- Validation and compliance checks to ensure only verified/KYC‑cleared entities can raise or invest.[file:12]  
+* REST APIs for startups, investors, and deals
+* Authentication & authorization (JWT)
+* PostgreSQL with Prisma migrations
+* Compliance checks for KYC-verified users
 
-**Local development**
+### **Local Development**
 
-```
+```bash
 cd backend
-cp .env.example .env     # set DB URL, JWT secret, etc.
+cp .env.example .env
 npm install
-npx prisma migrate dev   # apply migrations
-npm run dev              # nodemon / ts-node
+npx prisma migrate dev
+npm run dev
 ```
 
-Backend runs on `http://localhost:4000` by default.
+Runs at: `http://localhost:4000`.
 
 ---
 
-## CI/CD pipeline
+## 🧩 CI/CD Pipeline (Jenkins)
 
-The main branch is protected and deployed through a Jenkins‑based pipeline.[file:12]  
+### **Pipeline Stages**
 
-**Stages**
+1. **Checkout & Install**
 
-1. **Checkout & install**
-   - Clone repo, install frontend & backend dependencies using Node.js.  
+   * Clone repo
+   * Install dependencies
 
-2. **Static analysis & tests**
-   - Run unit tests for backend and frontend.  
-   - Run SonarQube scan for code quality and coverage.[file:12]  
+2. **Static Analysis & Tests**
+
+   * Unit tests
+   * SonarQube scan
 
 3. **Build**
-   - Build production frontend bundle.  
-   - Compile SCSS to CSS.  
-   - Package backend as a Node app.
 
-4. **Docker image build & push**
-   - Build versioned Docker images for frontend and backend.  
-   - Push images to JFrog Artifactory / container registry.[file:12]  
+   * Frontend production build
+   * SCSS → CSS
+   * Package backend
 
-5. **Infrastructure provisioning**
-   - Use Terraform to provision / update AWS resources (EKS cluster, RDS, networking).  
-   - Use Ansible for configuration of nodes and environment variables.[file:12]  
+4. **Docker Build & Push**
 
-6. **Deploy to Kubernetes**
-   - Apply manifests / Helm charts from `k8s/` to the EKS cluster.  
-   - Rolling updates with zero‑downtime strategy.
+   * Build versioned images
+   * Push to JFrog Artifactory
 
-7. **Monitoring & alerts**
-   - Prometheus scrapes application and node metrics.  
-   - Grafana dashboards visualize app health, latency, error rates, and resource usage.[file:12]  
+5. **Infrastructure Provisioning**
+
+   * Terraform for AWS (EKS, VPC, RDS)
+   * Ansible for node configuration
+
+6. **Kubernetes Deployment**
+
+   * Apply manifests / Helm charts
+   * Rolling updates (zero downtime)
+
+7. **Monitoring & Alerts**
+
+   * Prometheus metrics
+   * Grafana dashboards
 
 ---
 
-## Running everything with Docker (local)
+## 🐳 Docker (Local Setup)
 
-```
+```bash
 docker-compose up --build
 ```
 
-This brings up:
+This starts:
 
-- `raise-backend` on port `4000`  
-- `raise-frontend` on port `3000` (or 80 via reverse proxy)  
-- Local PostgreSQL instance with seeded data
-
----
-
-## Contributing
-
-- Create feature branches from `main`.  
-- Open a PR with passing tests and green SonarQube quality gate.  
-- All merges to `main` are automatically built and deployed through the CI/CD pipeline.
+* Backend → **4000**
+* Frontend → **3000** (or port 80 with reverse proxy)
+* PostgreSQL with seed data
 
 ---
 
-## License
+## 🤝 Contributing
 
-This repository is for academic/project use; please check with the team before external reuse.
+* Create feature branches from `main`
+* Open a PR with:
+
+  * Passing tests
+  * Green SonarQube quality gate
+* Merges to `main` trigger full CI/CD deployment
+
+---
+
+## 📄 License
+
+This project is for academic/project use.
+Contact the team for external or commercial reuse.
+
 ```
-
-[1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92555445/42c2881a-76fe-4ac6-a356-8d4c9bdfa102/Raise-Copy-Copy.pptx)
