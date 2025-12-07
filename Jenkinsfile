@@ -21,29 +21,15 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-    environment {
-        SONAR_TOKEN = credentials('sonar-raise-token')  // ID from Jenkins, not the token value
-    }
-    steps {
-        withSonarQubeEnv('SonarQube') {
-            bat "\"${env.SONAR_SCANNER_HOME}\\bin\\sonar-scanner.bat\" " +
-                "-Dsonar.projectKey=RAISE " +
-                "-Dsonar.host.url=${env.SONARQUBE_URL} " +
-                "-Dsonar.login=%SONAR_TOKEN%"
-        }
-    }
-}
-
-
-        stage('Build') {
-            steps {
-                withEnv(["PATH=${env.NODEJS_HOME};${env.PATH}"]) {
-                    bat 'npm run build'
-                }
+            environment {
+                SONAR_TOKEN = credentials('sonar-raise-token')
             }
-            post {
-                success {
-                    archiveArtifacts artifacts: 'build/**', allowEmptyArchive: true
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    bat "\"${env.SONAR_SCANNER_HOME}\\bin\\sonar-scanner.bat\" " +
+                        "-Dsonar.projectKey=RAISE " +
+                        "-Dsonar.host.url=${env.SONARQUBE_URL} " +
+                        "-Dsonar.login=%SONAR_TOKEN%"
                 }
             }
         }
